@@ -145,3 +145,6 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
+# chromedriver is a symlink to the local executable
+chromedriver
+
