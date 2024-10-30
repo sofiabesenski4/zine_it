@@ -40,7 +40,8 @@ DEFAULT_APPS = [
 ]
 
 LOCAL_APPS = [
-    'functional_tests' 
+    'tests',
+    'uploader'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS
