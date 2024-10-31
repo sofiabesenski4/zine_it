@@ -1,9 +1,8 @@
 from django.http import HttpResponse
+from uploader.forms import PageForm
+from django.views.generic.edit import FormView
 
-def new(request):
-    return HttpResponse("""
-    Image upload page
-    
-    <a>Upload</a>
-
-    """)
+class NewView(FormView):
+    template_name = "new.html"
+    form_class = PageForm
+    success_url = "/uploader/"
