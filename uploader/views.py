@@ -5,4 +5,4 @@ from django.views.generic.edit import FormView
 class NewView(FormView):
     template_name = "new.html"
     form_class = PageForm
-    success_url = "/uploader/"
+    success_url = "/url" 
