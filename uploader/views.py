@@ -1,8 +1,14 @@
 from django.http import HttpResponse
+from uploader.models import Page 
 from uploader.forms import PageForm
 from django.views.generic.edit import FormView
+from django.views.generic import ListView
 
-class NewView(FormView):
-    template_name = "new.html"
+class NewPageView(FormView):
+    template_name = "uploader/pages/new.html"
     form_class = PageForm
-    success_url = "/url" 
+    success_url = "/uploader/pages" 
+
+class IndexPageView(ListView):
+    model = Page 
+    template_name = "uploader/pages/index.html"  

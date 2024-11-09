@@ -1,0 +1,14 @@
+{% block title %}
+  Page Index
+{% endblock %}
+ 
+{% for object in object_list %}
+  <div>
+    Zine: {{ object.zine }}
+    Index: {{ object.index }}
+  </div>
+  <hr/>
+{% empty %}
+  No Pages yet!
+{% endfor %}
+ 
