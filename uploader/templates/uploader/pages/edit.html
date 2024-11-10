@@ -1,8 +1,9 @@
 {% block title %}
-  Create New Page
+  Edit Page
 {% endblock %}
-
+ 
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Upload">
 </form>
+

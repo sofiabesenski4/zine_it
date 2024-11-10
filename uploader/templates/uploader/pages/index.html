@@ -6,6 +6,7 @@
   <div>
     Zine: {{ object.zine }}
     Index: {{ object.index }}
+    <a href="{% url 'uploader:edit_page' id=object.id %}">Edit</a>
   </div>
   <hr/>
 {% empty %}
