@@ -6,9 +6,6 @@ from selenium.webdriver.support.ui import Select
 class UploaderTest(SeleniumTestCase):
     def test_image_uploader_form(self):
         Zine(name="Test Zine").save()
-        # Go to the login page
-        
-
         self.driver.get(self.live_server_url + "/uploader/pages")
         self.driver.find_element(By.LINK_TEXT, "Create a new page").click()
         self.driver.find_element(By.ID, "id_index").send_keys("1")
