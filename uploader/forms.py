@@ -7,4 +7,4 @@ class PageForm(forms.ModelForm):
 
     class Meta:
         model = Page
-        fields = ["index", "zine"] 
+        fields = ["index", "zine", "image"] 

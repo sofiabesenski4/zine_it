@@ -5,6 +5,10 @@
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Upload" id="upload">
+
+    <br>
+    <h3>Image Preview</h3>
+    <img src="{{ page.image.url}}">
 </form>
              
  
