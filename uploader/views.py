@@ -9,6 +9,10 @@ class PageCreateView(CreateView):
     template_name = "uploader/pages/new.html"
     success_url = "/uploader/pages" 
 
+    def post(self, request, *args, **kwargs):
+        return super(PageCreateView, self).post(request, args, kwargs)
+
+
 class PageUpdateView(UpdateView):
     form_class = PageForm 
     template_name = "uploader/pages/edit.html"
