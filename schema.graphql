@@ -1,0 +1,49 @@
+type Query {
+  hello: String
+  allZines: [ZineType]
+  countZines: BigInt
+}
+
+type ZineType {
+  id: ID!
+  name: String!
+  sheet: UploaderZineSheetChoices!
+  layout: UploaderZineLayoutChoices!
+  pages: [PageType!]!
+}
+
+"""An enumeration."""
+enum UploaderZineSheetChoices {
+  """A4, Europe"""
+  A4
+
+  """US Letter (8.5x11in)"""
+  LT
+
+  """US Legal (8.5x14in)"""
+  LG
+
+  """US Tabloid (11x17in)"""
+  TB
+}
+
+"""An enumeration."""
+enum UploaderZineLayoutChoices {
+  """4p Single fold vertical, one-side print, Portrait"""
+  T4
+
+  """8p Traditional inner-cut, single-side print, Landscape"""
+  TC8
+}
+
+type PageType {
+  index: Int!
+  image: String
+}
+
+"""
+The `BigInt` scalar type represents non-fractional whole numeric values.
+`BigInt` is not constrained to 32-bit like the `Int` type and thus is a less
+compatible type.
+"""
+scalar BigInt
