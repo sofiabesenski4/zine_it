@@ -136,5 +136,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GRAPHENE = {
-    "SCHEMA": "zine_it_django.graphql.schema"
+    "SCHEMA": "uploader.graphql.schema"
 }
