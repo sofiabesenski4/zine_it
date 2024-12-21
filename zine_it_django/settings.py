@@ -38,7 +38,8 @@ DEFAULT_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphene_django'
+    'graphene_django',
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'zine_it_django.urls'
@@ -140,3 +142,7 @@ GRAPHENE = {
     "SCHEMA_OUTPUT": "schema.graphql",
     "SCHEMA_INDENT": 2
 }
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
