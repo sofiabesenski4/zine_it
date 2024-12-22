@@ -10,29 +10,12 @@ const client = new ApolloClient({
 });
 // const client = ...
 
-client
-  .query({
-    query: gql`
-query MyQuery {
-  allZines {
-    pages {
-      index
-      image
-    }
-    id
-    layout
-    name
-    sheet
-  }
-}
-    `,
-  })
-  .then((result) => console.log(result));
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>
 );
 
