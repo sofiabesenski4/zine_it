@@ -1,7 +1,7 @@
 type Query {
-  hello: String
   allZines: [ZineType]
   countZines: BigInt
+  zineById(id: String): ZineType
 }
 
 type ZineType {

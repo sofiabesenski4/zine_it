@@ -13,14 +13,17 @@ class PageType(DjangoObjectType):
         fields = ("index", "image")
 
 class Query(g.ObjectType):
-    hello = g.String(default_value="Hi!")
     all_zines = g.List(ZineType)
     count_zines = g.BigInt()
+    zine_by_id = g.Field(ZineType, id=g.String())
 
     def resolve_all_zines(root, info):
         return models.Zine.objects.all()
 
     def resolve_count_zines(root, info):
         return models.Zine.objects.count()
+    
+    def resolve_zine_by_id(root, info, id):
+        return models.Zine.objects.get(pk=id)
 
 schema = g.Schema(query=Query)
