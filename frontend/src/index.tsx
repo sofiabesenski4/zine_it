@@ -8,7 +8,6 @@ const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql',
   cache: new InMemoryCache(),
 });
-// const client = ...
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
