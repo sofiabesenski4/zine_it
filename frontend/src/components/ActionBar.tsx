@@ -5,7 +5,11 @@ type ActionBarProps = {
 }
 
 const ActionBar: React.SFC<ActionBarProps> = (props) => {
-  return (props.children)
+  return (
+    <div className="mb-8">
+        {props.children}
+    </div>    
+)
 }
 
 

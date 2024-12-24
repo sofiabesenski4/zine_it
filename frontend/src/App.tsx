@@ -69,28 +69,30 @@ const App = () => {
   return (
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
       <div className="m-auto flex flex-col 
-      items-center justify-start gap-12 
+      items-center justify-between gap-12 
       h-full max-w-52"
       >
-        <div className="basis-1/6">
-          <img src={squatterZ} className="App-logo max-h-52 h-52 w-52" alt="logo" />
+        <div className="basis-1/3 flex flex-col items-center justify-start gap-12 h-full max-w-52">
+          <img src={squatterZ} className="App-logo max-h-32 h-36 w-36" alt="logo" />
+
+          <HeroBanner>
+            <div className="m-2">Open Source Zine Photocopier</div>
+          </HeroBanner>
         </div>
 
-        <HeroBanner>
-          <div className="m-2">Open Source Zine Photocopier</div>
-        </HeroBanner>
 
 
-        {currentZine ? <Container><div className="bg-yellow-200">{currentZine.name}</div></Container> : null}
-
-        <div className="zine__listing flex gap-4">
+        <div className="zine__listing flex flex-col items-center gap-6">
+          {currentZine ? <Container><div className="bg-yellow-200">{currentZine.name}</div></Container> : null}
+          <div className="zine__listing flex gap-4">
           { 
-            data.allZines.map((zine)=>
+          data.allZines.map((zine)=>
               <Container  onClick={() => setCurrentZine(zine)}>
                 <div className="w-22 h-18 ">{zine.name}</div>
               </Container>
             )
           }
+          </div>
         </div>
 
         <div className="">
