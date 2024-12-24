@@ -1,0 +1,29 @@
+.ripped-border:after{
+  content:" ";
+  display:block;
+  height: 45px;
+  background-image:url('../static/ripped-edge.png');
+  background-position: top;
+  background-repeat: repeat-x;
+  margin-top:-20px;
+  position:absolute;
+  width:100%;
+  image-rendering: crisp-edges;
+  transform: rotate(180deg);
+}
+.ripped-border:before{
+  content:" ";
+  image-rendering: crisp-edges;
+  background-repeat: repeat-x;
+  display:block;
+  width:100%;
+  height: 65px;
+  background-image:url('../static/ripped-edge.png');
+  position:absolute;
+  margin-top:-26px;
+  z-index:1;
+}
+.p {
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
