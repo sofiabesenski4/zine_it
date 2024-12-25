@@ -40,6 +40,7 @@ DEFAULT_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'corsheaders',
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
