@@ -4,8 +4,10 @@ import './App.css';
 import useFetch from './hooks/useFetch'
 import HeroBanner from './components/HeroBanner'
 import ActionBar from './components/ActionBar';
+import PageListing from './components/PageListing';
 import { ReactElement, useState } from 'react'
 import { useQuery, gql } from "@apollo/client"
+import { Zine } from "./types"
 
 const GET_ZINES =   gql`
   query MyQuery {
@@ -57,18 +59,6 @@ const Button: React.FC<ButtonProps> = (props) => {
   )
 }
 
-interface Zine {
-  id: string
-  name: string
-  pages: Page[]
-}
-
-interface Page {
-  id: string
-  index: number
-  image_src: string
-}
-
 const App = () => {
   const [zines, setZines] = useState<Zine[]>([])
   // TODO: Interpolate this with some sort of BASE_URL configuration
@@ -94,13 +84,25 @@ const App = () => {
 
 
         <div className="zine__listing flex flex-col items-center gap-6">
-          {currentZine ? <Container><div className="bg-yellow-200">{currentZine.name}</div></Container> : null}
+          {
+            currentZine ? (
+              <>
+                <Container>
+                  <div className="bg-yellow-200">
+                    {currentZine.name}
+                  </div>
+                </Container>
+                <PageListing key={"zine_" + currentZine.id} zine={currentZine}>
+                </PageListing>
+              </>
+            ) : (null)
+          }
           <div className="zine__listing flex gap-4">
             { 
                loading ? (<p>Loading</p>):(data.map((zine)=> { 
                 return( 
-                       <Container  onClick={() => setCurrentZine(zine)}>
-                        <div className="w-22 h-18 ">{zine.name}</div>
+                       <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
+                        <div className="mb-2">{zine.name}</div>
                        </Container>
                       )
               }))
