@@ -1,8 +1,11 @@
 from django.http import HttpResponse
-from uploader.models import Page 
+from uploader.models import Page, Zine 
+from uploader.serializers import ZineSerializer
 from uploader.forms import PageForm
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
+
+from rest_framework import viewsets
 
 class PageCreateView(CreateView):
     form_class = PageForm
@@ -25,3 +28,7 @@ class PageUpdateView(UpdateView):
 class PageIndexView(ListView):
     model = Page 
     template_name = "uploader/pages/index.html"  
+
+class ZineViewSet(viewsets.ModelViewSet):
+    queryset = Zine.objects.all().order_by('name')
+    serializer_class = ZineSerializer
