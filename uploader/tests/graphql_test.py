@@ -40,3 +40,27 @@ def test_all_zines_query_returns_data(client_query):
     assert '1' == zine_data[0]['id']
     assert 'Socialism 101' == zine_data[1]['name']
 
+@pytest.mark.django_db
+def test_zine_by_id(client_query):
+    zine = Zine(name="Anarchy 101")
+    zine.save()
+
+    response = client_query(
+        '''
+        query ZineByIdQuery($id: String) {
+            zineById(id: $id}) {
+                id
+                name
+            }
+        }
+        ''',
+        variables={"id": str(zine.id)}
+    )
+
+    
+    content = json.loads(response.content)
+    breakpoint()
+
+    assert response.status_code == 200
+    assert 'errors' not in content
+
