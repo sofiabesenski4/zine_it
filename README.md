@@ -1,15 +1,18 @@
-# zine-it
+# Zine It!
 Create zines quickly and easily from image uploads
 
-# TDD Tutorial:
-Currently following this tutorial to get the TDD workflow set up.
 
-https://dev.to/pymeister/test-driven-development-with-django-32n8
+## Features
+### Uploader:
+Create a new Zine record, and upload images into the provided template. You can then export the Zine in a format that can be easily printed and stapled for distribution.
 
-# Using PDFs
-https://docs.djangoproject.com/en/5.1/howto/outputting-pdf/
+### Library:
+For registered users, you are allowed to upload your Zines to the library, and tag them with categories for others to find.
+
 
 # Graphql
+We will use GraphQL in the "Library" feature of the project.
+For simplicity, we will use the DRF Serializers on the Uploader app, since we aren't going to benefit much from switching from REST.
 
 ## Export from Python
 
