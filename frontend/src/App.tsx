@@ -1,6 +1,7 @@
 import blackFlag from './logo-black-flag.svg'; 
 import squatterZ from './squatter-z.svg'; 
 import './App.css';  
+import useFetch from './hooks/useFetch'
 import HeroBanner from './components/HeroBanner'
 import ActionBar from './components/ActionBar';
 import { ReactElement, useState } from 'react'
@@ -56,16 +57,26 @@ const Button: React.FC<ButtonProps> = (props) => {
   )
 }
 
+interface Zine {
+  id: string
+  name: string
+  pages: Page[]
+}
+
+interface Page {
+  id: string
+  index: number
+  image_src: string
+}
 
 const App = () => {
-  const { loading, error, data } = useQuery(GET_ZINES)
-  
+  const [zines, setZines] = useState<Zine[]>([])
+  // TODO: Interpolate this with some sort of BASE_URL configuration
+  const [data, loading] = useFetch(
+    "http://localhost:8000/uploader/zines.json"
+  );
   const [currentZine, setCurrentZine] = useState<Zine>(null)
-
-  if (loading) return <p>Loading..</p>
-  if (error) return <p>Error : {error.message}</p>
-
-
+ 
   return (
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
       <div className="m-auto flex flex-col 
@@ -85,13 +96,15 @@ const App = () => {
         <div className="zine__listing flex flex-col items-center gap-6">
           {currentZine ? <Container><div className="bg-yellow-200">{currentZine.name}</div></Container> : null}
           <div className="zine__listing flex gap-4">
-          { 
-          data.allZines.map((zine)=>
-              <Container  onClick={() => setCurrentZine(zine)}>
-                <div className="w-22 h-18 ">{zine.name}</div>
-              </Container>
-            )
-          }
+            { 
+               loading ? (<p>Loading</p>):(data.map((zine)=> { 
+                return( 
+                       <Container  onClick={() => setCurrentZine(zine)}>
+                        <div className="w-22 h-18 ">{zine.name}</div>
+                       </Container>
+                      )
+              }))
+            } 
           </div>
         </div>
 
