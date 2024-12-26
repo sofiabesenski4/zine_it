@@ -1,6 +1,5 @@
 import { ReactElement } from 'react'
 import { Zine, Page } from '../types'
-import useFetch from '../hooks/useFetch'
 
 
 type PageCardProps = {

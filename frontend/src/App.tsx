@@ -1,11 +1,10 @@
 import blackFlag from './logo-black-flag.svg';
 import squatterZ from './squatter-z.svg';
 import './App.css';
-import useFetch from './hooks/useFetch'
 import HeroBanner from './components/HeroBanner'
 import ActionBar from './components/ActionBar';
 import PageListing from './components/PageListing';
-import { ReactElement, useState } from 'react'
+import { ReactElement, useState, useEffect } from 'react'
 import { Zine } from "./types"
 import { useForm, SubmitHandler } from "react-hook-form"
 
@@ -61,23 +60,35 @@ type ZineInputs = {
   // TODO: Add a hidden author field to this.
 }
 
+
 const App = () => {
   const [zines, setZines] = useState<Zine[]>([])
-  // TODO: Interpolate this with some sort of BASE_URL configuration
-  const [data, loading] = useFetch(
-    "http://localhost:8000/uploader/zines.json"
-  );
+  const [loading, setLoading] = useState(true);
+  
+  async function fetchZines() {
+    const response = await fetch("http://localhost:8000/uploader/zines.json");
+    const json = await response.json();
+    setZines(json);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchZines();
+  }, zines);
+
+
   const [showZineForm, setShowZineForm] = useState<boolean>(false)
-  const [currentZine, setCurrentZine] = useState<Zine>(null)
+  const [currentZine, setCurrentZine] = useState<Zine | null>(null)
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<ZineInputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<ZineInputs> = (data) => {
     createZine(data)
     setShowZineForm(false)
+    fetchZines()
   }
 
   return (
@@ -105,8 +116,7 @@ const App = () => {
                     {currentZine.name}
                   </div>
                 </Container>
-                <PageListing key={"zine_" + currentZine.id} zine={currentZine}>
-                </PageListing>
+                
               </>
             ) : (null)
           }
@@ -126,7 +136,7 @@ const App = () => {
               
             </form>
               ) : 
-              loading ? (<p>Loading</p>) : (data.map((zine) => {
+              loading ? (<p>Loading</p>) : (zines.map((zine) => {
                 return (
                   <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
                     <div className="mb-2">{zine.name}</div>
