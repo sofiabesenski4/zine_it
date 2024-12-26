@@ -99,7 +99,7 @@ const App = () => {
     createZine(data).then((json) => fetchZines()).then(()=>setShowZineForm(false))
   }
 
-  const onDeleteZine: Zine = (zine: Zine) => {
+  const onDeleteZine = (zine: Zine) => {
     deleteZine(zine).then(()=> fetchZines()).then(()=> setCurrentZine(null))
   }
 
@@ -149,13 +149,16 @@ const App = () => {
                 </Button>
 
               </form>
-            ) : (
-              !!loading ? (<p>Loading</p>) : (zines.map((zine) =>
-                <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
-                  <div className="mb-2">{zine.name}</div>
-                </Container>
+            ) :
+              !!loading ? (<p>Loading</p>) : (
+                !currentZine && zines.map((zine) =>
+                      <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
+                        <div className="mb-2">{zine.name}</div>
+                      </Container>
+                    )
+
+
               )
-              ))
             }
           </div>
         </div>
