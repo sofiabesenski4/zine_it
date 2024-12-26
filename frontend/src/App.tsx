@@ -52,7 +52,7 @@ const App = () => {
       items-center justify-between gap-12 
       h-full max-w-52"
       >
-        <div className="basis-1/3 flex flex-col items-center justify-start gap-12 h-full max-w-52">
+        <div className="basis-1/6 flex flex-col items-center justify-start gap-12 h-full max-w-52">
           <img src={squatterZ} className="App-logo max-h-32 h-36 w-36" alt="logo" />
 
           <HeroBanner>
