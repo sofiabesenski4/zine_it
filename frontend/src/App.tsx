@@ -44,6 +44,7 @@ const App = () => {
     "http://localhost:8000/uploader/zines.json"
   );
   const [currentZine, setCurrentZine] = useState<Zine>(null)
+  const [showZineForm, setShowZineForm] = useState<boolean>(false)
 
   return (
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
@@ -76,7 +77,7 @@ const App = () => {
             ) : (null)
           }
           <div className="zine__listing flex gap-4">
-            {
+            { showZineForm ? ("Zine Form") : 
               loading ? (<p>Loading</p>) : (data.map((zine) => {
                 return (
                   <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
@@ -90,7 +91,8 @@ const App = () => {
 
         <div className="">
           <ActionBar>
-            <Button onClick={() => { setCurrentZine(null) }} text="Reset" />
+            <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />
+            <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Reset" />
           </ActionBar>
         </div>
       </div>
