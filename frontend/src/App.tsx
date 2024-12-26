@@ -163,13 +163,13 @@ const App = () => {
           </div>
         </div>
 
-        <div className="mb-2">
+
           <ActionBar>
             {!showZineForm && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
             {!!currentZine && <Button onClick={() => onDeleteZine(currentZine)} text="Delete Zine" />}
-            <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Reset" />
+            {(showZineForm || currentZine || showZineForm) && <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Back" />}
           </ActionBar>
-        </div>
+
       </div>
     </div>
   );
