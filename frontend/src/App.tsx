@@ -1,34 +1,12 @@
-import blackFlag from './logo-black-flag.svg'; 
-import squatterZ from './squatter-z.svg'; 
-import './App.css';  
+import blackFlag from './logo-black-flag.svg';
+import squatterZ from './squatter-z.svg';
+import './App.css';
 import useFetch from './hooks/useFetch'
 import HeroBanner from './components/HeroBanner'
 import ActionBar from './components/ActionBar';
 import PageListing from './components/PageListing';
 import { ReactElement, useState } from 'react'
-import { useQuery, gql } from "@apollo/client"
 import { Zine } from "./types"
-
-const GET_ZINES =   gql`
-  query MyQuery {
-    allZines {
-      pages {
-        index
-        image
-      }
-      id
-      layout
-      name
-      sheet
-    }
-  }
-`
-const GET_ZINE = gql`
-  query Zine($name: String!) {
-    name
-    pages
-  }
-`
 
 type ContainerProps = {
   onClick: (event: React.MouseEvent<HTMLElement>) => void
@@ -40,9 +18,9 @@ const Container: React.SFC<ContainerProps> = (props) => {
     <div className="
     rounded-md bg-stone-400 w-36 h-16 
     hover:bg-sky-700 flex 
-    justify-center items-center" 
-    onClick={props.onClick}>
-      { props.children }
+    justify-center items-center"
+      onClick={props.onClick}>
+      {props.children}
     </div>
   )
 }
@@ -55,7 +33,7 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = (props) => {
   return (
-      <button onClick={props.onClick} className="bg-stone-300 h-16 w-36 hover:bg-sky-700" type="submit">{props.text}</button>
+    <button onClick={props.onClick} className="bg-stone-300 h-16 w-36 hover:bg-sky-700" type="submit">{props.text}</button>
   )
 }
 
@@ -66,7 +44,7 @@ const App = () => {
     "http://localhost:8000/uploader/zines.json"
   );
   const [currentZine, setCurrentZine] = useState<Zine>(null)
- 
+
   return (
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
       <div className="m-auto flex flex-col 
@@ -98,21 +76,21 @@ const App = () => {
             ) : (null)
           }
           <div className="zine__listing flex gap-4">
-            { 
-               loading ? (<p>Loading</p>):(data.map((zine)=> { 
-                return( 
-                       <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
-                        <div className="mb-2">{zine.name}</div>
-                       </Container>
-                      )
+            {
+              loading ? (<p>Loading</p>) : (data.map((zine) => {
+                return (
+                  <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
+                    <div className="mb-2">{zine.name}</div>
+                  </Container>
+                )
               }))
-            } 
+            }
           </div>
         </div>
 
         <div className="">
           <ActionBar>
-            <Button onClick={()=>{setCurrentZine(null)}} text="Reset"/>
+            <Button onClick={() => { setCurrentZine(null) }} text="Reset" />
           </ActionBar>
         </div>
       </div>

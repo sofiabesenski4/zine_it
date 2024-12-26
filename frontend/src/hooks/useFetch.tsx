@@ -18,4 +18,4 @@ function useFetch(url) {
   return [data, loading];
 }
 
- export default useFetch ;
+ export default useFetch;
