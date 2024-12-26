@@ -6,8 +6,8 @@ type PageCardProps = {
   page: Page
 }
 const PageCard: React.SFC<PageCardProps> = (props) => {
-  return( 
-    <div className="bg-slate-400"> 
+  return(
+    <div className="bg-slate-400">
       Page id: {props.page.id}, index: {props.page.index}
     </div>
         )
@@ -22,7 +22,7 @@ const PageListing: React.FC<PageListingProps> = (props) => {
   const [pages, setPages] = useState<Page[]>([])
   const [loading, setLoading] = useState(true);
 
- 
+
   async function fetchPages() {
     setLoading(true);
     const response = await fetch(`http://localhost:8000/uploader/pages?zine=${props.zine.id}`);
@@ -37,7 +37,7 @@ const PageListing: React.FC<PageListingProps> = (props) => {
 
   return (
     <>
-      { 
+      {
         loading ? <p>Loading</p>:
            <div className="flex gap-4">
            {
@@ -47,7 +47,7 @@ const PageListing: React.FC<PageListingProps> = (props) => {
            }
            </div>
 
-        
+
 
       }
     </>
