@@ -28,7 +28,7 @@ const Container: React.SFC<ContainerProps> = (props) => {
 
 type ButtonProps = {
   text: string
-  onClick: (event: React.MouseEvent<HTMLElement>) => void
+  onClick: (event: React.MouseEvent<HTMLElement> | React.FormEvent)=> void
   children: ReactElement
 }
 
@@ -38,8 +38,27 @@ const Button: React.FC<ButtonProps> = (props) => {
   )
 }
 
-type Inputs = {
+async function createZine(inputs: Inputs) {
+  let url = "http://localhost:8000/uploader/zines/"
+  console.log(JSON.stringify(inputs))
+  
+  return await fetch(url, {
+    body: JSON.stringify(inputs),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    method: "POST"
+  }).then((response) => response.json())
+    .then((json) => {
+      return(json)
+    })
+  }
+
+
+type ZineInputs = {
   name: string
+  // TODO: Add a hidden author field to this.
 }
 
 const App = () => {
@@ -48,20 +67,18 @@ const App = () => {
   const [data, loading] = useFetch(
     "http://localhost:8000/uploader/zines.json"
   );
-  const [currentZine, setCurrentZine] = useState<Zine>(null)
   const [showZineForm, setShowZineForm] = useState<boolean>(false)
+  const [currentZine, setCurrentZine] = useState<Zine>(null)
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>()
+  } = useForm<ZineInputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // TODO: POST to the API endpoint for Zines in Django.
-    console.log(data)
+    createZine(data)
     setShowZineForm(false)
   }
-  
 
   return (
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
@@ -102,7 +119,11 @@ const App = () => {
               {/* errors will return when field validation fails  */}
               {errors.name && <span>This field is required</span>}
         
-              <input type="submit" />
+              {/* TODO: Add hidden author field to this form. */}
+              <Button text="Submit"> 
+                <input type="submit" />
+              </Button>
+              
             </form>
               ) : 
               loading ? (<p>Loading</p>) : (data.map((zine) => {
