@@ -1,6 +1,5 @@
 from django.test import RequestFactory, TestCase, Client
 from uploader.models import Zine, Page
-from uploader.views import PageIndexView, PageCreateView
 
 from rest_framework.test import APIRequestFactory, APIClient
 
