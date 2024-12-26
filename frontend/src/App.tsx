@@ -47,10 +47,19 @@ async function createZine(inputs: Inputs) {
       Accept: "application/json"
     },
     method: "POST"
-  }).then((response) => response.json())
-    .then((json) => {
-      return (json)
-    })
+  })
+}
+
+async function deleteZine(zine: Zine) {
+  let url = `http://localhost:8000/uploader/zines/${zine.id}/`
+
+  return await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    method: "DELETE"
+  })
 }
 
 
@@ -85,10 +94,14 @@ const App = () => {
     watch,
     formState: { errors },
   } = useForm<ZineInputs>()
-
+  
   const onCreateZineSubmit: SubmitHandler<ZineInputs> = (data) => {
     createZine(data).then((json) => fetchZines())
     setShowZineForm(false)
+  }
+
+  const onDeleteZine: Zine = (zine: Zine) => {
+    deleteZine(zine).then(()=> fetchZines()).then(()=> setCurrentZine(null))
   }
 
   return (
@@ -151,6 +164,7 @@ const App = () => {
         <div className="">
           <ActionBar> 
             {!showZineForm && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
+            {!!currentZine && <Button onClick={() => onDeleteZine(currentZine)} text="Delete Zine" />}
             <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Reset" />
           </ActionBar>
         </div>
