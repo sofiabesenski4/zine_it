@@ -4,6 +4,7 @@ import './App.css';
 import useFetch from './hooks/useFetch'
 import HeroBanner from './components/HeroBanner'
 import ActionBar from './components/ActionBar';
+import Form from './components/Form';
 import PageListing from './components/PageListing';
 import { ReactElement, useState } from 'react'
 import { Zine } from "./types"
@@ -77,7 +78,7 @@ const App = () => {
             ) : (null)
           }
           <div className="zine__listing flex gap-4">
-            { showZineForm ? ("Zine Form") : 
+            { showZineForm ? (<Form/>) : 
               loading ? (<p>Loading</p>) : (data.map((zine) => {
                 return (
                   <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
