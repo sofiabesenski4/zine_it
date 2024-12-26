@@ -27,7 +27,7 @@ const Container: React.SFC<ContainerProps> = (props) => {
 
 type ButtonProps = {
   text: string
-  onClick: (event: React.MouseEvent<HTMLElement> | React.FormEvent)=> void
+  onClick: (event: React.MouseEvent<HTMLElement> | React.FormEvent) => void
   children: ReactElement
 }
 
@@ -39,8 +39,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
 async function createZine(inputs: Inputs) {
   let url = "http://localhost:8000/uploader/zines/"
-  console.log(JSON.stringify(inputs))
-  
+
   return await fetch(url, {
     body: JSON.stringify(inputs),
     headers: {
@@ -50,9 +49,9 @@ async function createZine(inputs: Inputs) {
     method: "POST"
   }).then((response) => response.json())
     .then((json) => {
-      return(json)
+      return (json)
     })
-  }
+}
 
 
 type ZineInputs = {
@@ -64,8 +63,9 @@ type ZineInputs = {
 const App = () => {
   const [zines, setZines] = useState<Zine[]>([])
   const [loading, setLoading] = useState(true);
-  
+
   async function fetchZines() {
+    setLoading(true);
     const response = await fetch("http://localhost:8000/uploader/zines.json");
     const json = await response.json();
     setZines(json);
@@ -74,7 +74,7 @@ const App = () => {
 
   useEffect(() => {
     fetchZines();
-  }, zines);
+  }, []);
 
 
   const [showZineForm, setShowZineForm] = useState<boolean>(false)
@@ -85,10 +85,10 @@ const App = () => {
     watch,
     formState: { errors },
   } = useForm<ZineInputs>()
-  const onSubmit: SubmitHandler<ZineInputs> = (data) => {
-    createZine(data)
+
+  const onCreateZineSubmit: SubmitHandler<ZineInputs> = (data) => {
+    createZine(data).then((json) => fetchZines())
     setShowZineForm(false)
-    fetchZines()
   }
 
   return (
@@ -116,41 +116,41 @@ const App = () => {
                     {currentZine.name}
                   </div>
                 </Container>
-                
+                <PageListing zine={currentZine}>
+                  <></>
+                </PageListing>
               </>
             ) : (null)
           }
           <div className="zine__listing flex gap-4">
-            { showZineForm ? (
-              <form onSubmit={handleSubmit(onSubmit)}>
-              {/* register your input into the hook by invoking the "register" function */}
-              {/* include validation with required or other standard HTML validation rules */}
-              <input {...register("name", { required: true })} />
-              {/* errors will return when field validation fails  */}
-              {errors.name && <span>This field is required</span>}
-        
-              {/* TODO: Add hidden author field to this form. */}
-              <Button text="Submit"> 
-                <input type="submit" />
-              </Button>
-              
-            </form>
-              ) : 
-              loading ? (<p>Loading</p>) : (zines.map((zine) => {
-                return (
-                  <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
-                    <div className="mb-2">{zine.name}</div>
-                  </Container>
-                )
-              }))
+            {showZineForm ? (
+              <form onSubmit={handleSubmit(onCreateZineSubmit)}>
+                {/* register your input into the hook by invoking the "register" function */}
+                {/* include validation with required or other standard HTML validation rules */}
+                <input {...register("name", { required: true })} />
+                {/* errors will return when field validation fails  */}
+                {errors.name && <span>This field is required</span>}
+
+                {/* TODO: Add hidden author field to this form. */}
+                <Button text="Submit">
+                  <input type="submit" />
+                </Button>
+
+              </form>
+            ) : (
+              !!loading ? (<p>Loading</p>) : (zines.map((zine) =>
+                <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
+                  <div className="mb-2">{zine.name}</div>
+                </Container>
+              )
+              ))
             }
           </div>
         </div>
 
         <div className="">
-          <ActionBar>
-            {<Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
-            
+          <ActionBar> 
+            {!showZineForm && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
             <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Reset" />
           </ActionBar>
         </div>
