@@ -16,8 +16,8 @@ type ContainerProps = {
 const Container: React.SFC<ContainerProps> = (props) => {
   return (
     <div className="
-    rounded-md bg-stone-400 w-20 h-32 
-    hover:bg-sky-700 flex 
+    rounded-md bg-stone-400 w-20 h-32
+    hover:bg-sky-700 flex
     justify-center items-center"
       onClick={props.onClick}>
       {props.children}
@@ -77,14 +77,14 @@ const App = () => {
     setLoading(true);
     const response = await fetch("http://localhost:8000/uploader/zines.json");
     const json = await response.json();
-    setZines(json);
-    setLoading(false);
+    await setZines(json);
+    await  setLoading(false);
   }
 
+  // Always start by showing all zines in the database.
   useEffect(() => {
     fetchZines();
   }, []);
-
 
   const [showZineForm, setShowZineForm] = useState<boolean>(false)
   const [currentZine, setCurrentZine] = useState<Zine | null>(null)
@@ -94,10 +94,9 @@ const App = () => {
     watch,
     formState: { errors },
   } = useForm<ZineInputs>()
-  
+
   const onCreateZineSubmit: SubmitHandler<ZineInputs> = (data) => {
-    createZine(data).then((json) => fetchZines())
-    setShowZineForm(false)
+    createZine(data).then((json) => fetchZines()).then(()=>setShowZineForm(false))
   }
 
   const onDeleteZine: Zine = (zine: Zine) => {
@@ -106,8 +105,8 @@ const App = () => {
 
   return (
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
-      <div className="m-auto flex flex-col 
-      items-center justify-between gap-12 
+      <div className="m-auto flex flex-col
+      items-center justify-between gap-12
       h-full max-w-52"
       >
         <div className="basis-1/6 flex flex-col items-center justify-start gap-12 h-full max-w-52">
@@ -161,8 +160,8 @@ const App = () => {
           </div>
         </div>
 
-        <div className="">
-          <ActionBar> 
+        <div className="mb-2">
+          <ActionBar>
             {!showZineForm && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
             {!!currentZine && <Button onClick={() => onDeleteZine(currentZine)} text="Delete Zine" />}
             <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Reset" />
