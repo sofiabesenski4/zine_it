@@ -137,16 +137,18 @@ const App = () => {
           <div className="zine__listing flex gap-4">
             {showZineForm ? (
               <form onSubmit={handleSubmit(onCreateZineSubmit)}>
-                {/* register your input into the hook by invoking the "register" function */}
-                {/* include validation with required or other standard HTML validation rules */}
-                <input {...register("name", { required: true })} />
-                {/* errors will return when field validation fails  */}
-                {errors.name && <span>This field is required</span>}
+                <div className="flex flex-col items-center gap-6">
+                  {/* register your input into the hook by invoking the "register" function */}
+                  {/* include validation with required or other standard HTML validation rules */}
+                  <input {...register("name", { required: true })} />
+                  {/* errors will return when field validation fails  */}
+                  {errors.name && <span>This field is required</span>}
 
-                {/* TODO: Add hidden author field to this form. */}
-                <Button text="Submit">
-                  <input type="submit" />
-                </Button>
+                  {/* TODO: Add hidden author field to this form. */}
+                  <Button text="Save">
+                    <input type="submit" />
+                  </Button>
+                </div>
 
               </form>
             ) :
