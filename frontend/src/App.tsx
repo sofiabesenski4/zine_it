@@ -120,11 +120,9 @@ const App = () => {
         {
           currentZine ? (
             <div className="flex grow overflow-y-auto justify-start flex-col items-center gap-6 w-screen">
-              <Container>
-                <div className="bg-yellow-200">
-                  {currentZine.name}
-                </div>
-              </Container>
+              <div className="bg-yellow-200">
+                {currentZine.name}
+              </div>
               <PageListing zine={currentZine}>
                 <></>
               </PageListing>
