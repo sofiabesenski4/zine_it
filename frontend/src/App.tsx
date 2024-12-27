@@ -157,9 +157,8 @@ const App = () => {
             ) : (null)
           }
 
-
           <ActionBar>
-            {!showZineForm && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
+            {!showZineForm && !currentZine && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
             {!!currentZine && <Button onClick={() => onDeleteZine(currentZine)} text="Delete Zine" />}
             {(showZineForm || currentZine || showZineForm) && <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Back" />}
           </ActionBar>
