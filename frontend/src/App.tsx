@@ -105,12 +105,10 @@ const App = () => {
 
   return (
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
-      <div className="m-auto flex flex-col
-      items-center justify-between gap-12
-      h-full w-11/12"
+      <div className="m-auto flex flex-col items-center justify-between gap-12 h-full w-11/12"
       >
-        <div className="basis-1/6 flex flex-col items-center justify-start gap-12 h-full w-full">
-          <img src={squatterZ} className="App-logo max-h-32 h-32 w-32" alt="logo" />
+        <div className="basis-1/6 flex flex-col items-center justify-start gap-8 w-full">
+          <img src={squatterZ} className="App-logo h-10 w-10" alt="logo" />
 
           <HeroBanner>
             <div className="m-2">Open Source Zine Photocopier</div>
