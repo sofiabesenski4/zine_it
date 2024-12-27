@@ -9,8 +9,7 @@ const ActionBar: React.SFC<ActionBarProps> = (props) => {
     <div className="mb-8 flex gap-2">
         {props.children}
     </div>    
-)
+  )
 }
-
 
 export default ActionBar
