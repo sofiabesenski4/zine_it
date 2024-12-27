@@ -107,10 +107,10 @@ const App = () => {
     <div className="App h-screen w-screen bg-stone-800 overflow-hidden">
       <div className="m-auto flex flex-col
       items-center justify-between gap-12
-      h-full max-w-52"
+      h-full w-11/12"
       >
-        <div className="basis-1/6 flex flex-col items-center justify-start gap-12 h-full max-w-52">
-          <img src={squatterZ} className="App-logo max-h-32 h-36 w-36" alt="logo" />
+        <div className="basis-1/6 flex flex-col items-center justify-start gap-12 h-full w-full">
+          <img src={squatterZ} className="App-logo max-h-32 h-32 w-32" alt="logo" />
 
           <HeroBanner>
             <div className="m-2">Open Source Zine Photocopier</div>
@@ -119,10 +119,9 @@ const App = () => {
 
 
 
-        <div className="zine__listing flex flex-col items-center gap-6">
           {
             currentZine ? (
-              <>
+              <div className="flex grow justify-start flex-col items-center gap-6 w-screen">
                 <Container>
                   <div className="bg-yellow-200">
                     {currentZine.name}
@@ -131,39 +130,39 @@ const App = () => {
                 <PageListing zine={currentZine}>
                   <></>
                 </PageListing>
-              </>
-            ) : (null)
+              </div>
+            ) : (
+              <div className="zine__listing flex gap-4 h-full justify-center flex-wrap overflow-y-auto">
+              {
+                zines.map((zine) =>
+                          <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
+                          <div className="mb-2 max-w-9/12">{zine.name}</div>
+                          </Container>
+                         )
+              }
+              </div>
+            )
           }
-          <div className="zine__listing flex gap-4">
-            {showZineForm ? (
-              <form onSubmit={handleSubmit(onCreateZineSubmit)}>
-                <div className="flex flex-col items-center gap-6">
-                  {/* register your input into the hook by invoking the "register" function */}
-                  {/* include validation with required or other standard HTML validation rules */}
-                  <input {...register("name", { required: true })} />
-                  {/* errors will return when field validation fails  */}
-                  {errors.name && <span>This field is required</span>}
+          {showZineForm ? (
+            <form onSubmit={handleSubmit(onCreateZineSubmit)}>
+              <div className="flex flex-col items-center gap-6">
+                {/* register your input into the hook by invoking the "register" function */}
+                {/* include validation with required or other standard HTML validation rules */}
+                <label className="text-slate-100">Name</label>
+                <input {...register("name", { required: true })} />
+                {/* errors will return when field validation fails  */}
+                {errors.name && <span>This field is required</span>}
 
-                  {/* TODO: Add hidden author field to this form. */}
-                  <Button text="Save">
-                    <input type="submit" />
-                  </Button>
-                </div>
+                {/* TODO: Add hidden author field to this form. */}
+                <Button text="Save">
+                  <input type="submit" />
+                </Button>
+              </div>
 
-              </form>
-            ) :
-              !!loading ? (<p>Loading</p>) : (
-                !currentZine && zines.map((zine) =>
-                      <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
-                        <div className="mb-2">{zine.name}</div>
-                      </Container>
-                    )
-
-
-              )
-            }
-          </div>
-        </div>
+            </form>
+          ) : (null)
+            
+          }
 
 
           <ActionBar>

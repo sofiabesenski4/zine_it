@@ -7,8 +7,11 @@ type PageCardProps = {
 }
 const PageCard: React.SFC<PageCardProps> = (props) => {
   return(
-    <div className="bg-slate-400">
-      Page id: {props.page.id}, index: {props.page.index}
+    <div className="flex flex-col bg-slate-400 h-32 w-20">
+
+      <div>Page id: {props.page.id}</div>
+      <div>index: {props.page.index}</div>
+
     </div>
         )
 }
@@ -39,16 +42,13 @@ const PageListing: React.FC<PageListingProps> = (props) => {
     <>
       {
         loading ? <p>Loading</p>:
-           <div className="flex gap-4">
+           <div className="flex flex-start flex-wrap justify-center gap-4 overflow-y-auto max-h-fit w-9/12">
            {
               pages.map((page) => {
-                return(<PageCard key={"zine_"+ props.zine.id +"_page_" + page.id} page={page}></PageCard>)
+                return(<div className="shrink-0" key={"zine_"+ props.zine.id +"_page_" + page.id}><PageCard page={page}></PageCard></div>)
               })
            }
            </div>
-
-
-
       }
     </>
   )
