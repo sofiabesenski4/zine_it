@@ -117,33 +117,32 @@ const App = () => {
           </HeroBanner>
         </div>
 
-
-
-          {
-            currentZine ? (
-              <div className="flex grow justify-start flex-col items-center gap-6 w-screen">
-                <Container>
-                  <div className="bg-yellow-200">
-                    {currentZine.name}
-                  </div>
-                </Container>
-                <PageListing zine={currentZine}>
-                  <></>
-                </PageListing>
-              </div>
-            ) : (
-              <div className="zine__listing flex gap-4 h-full justify-center flex-wrap overflow-y-auto">
+        {
+          currentZine ? (
+            <div className="flex grow overflow-y-auto justify-start flex-col items-center gap-6 w-screen">
+              <Container>
+                <div className="bg-yellow-200">
+                  {currentZine.name}
+                </div>
+              </Container>
+              <PageListing zine={currentZine}>
+                <></>
+              </PageListing>
+            </div>
+          ) : (
+            <div className="zine__listing flex gap-4 h-full justify-center flex-wrap overflow-y-auto">
               {
                 zines.map((zine) =>
-                          <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
-                          <div className="mb-2 max-w-9/12">{zine.name}</div>
-                          </Container>
-                         )
+                    <Container key={"zine_container__" + zine.id} onClick={() => setCurrentZine(zine)}>
+                    <div className="mb-2 max-w-9/12">{zine.name}</div>
+                    </Container>
+                 )
               }
-              </div>
-            )
-          }
-          {showZineForm ? (
+            </div>
+          )
+        }
+        {
+            showZineForm ? (
             <form onSubmit={handleSubmit(onCreateZineSubmit)}>
               <div className="flex flex-col items-center gap-6">
                 {/* register your input into the hook by invoking the "register" function */}
@@ -158,10 +157,8 @@ const App = () => {
                   <input type="submit" />
                 </Button>
               </div>
-
             </form>
-          ) : (null)
-            
+            ) : (null)
           }
 
 
