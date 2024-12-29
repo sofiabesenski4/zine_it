@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// Eventually used for the Library feature.
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql',

@@ -1,46 +1,49 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { Zine, Page } from '../types'
-import useFetch from '../hooks/useFetch'
-
+import { fetchPages } from '../api'
 
 type PageCardProps = {
   zine: Zine
   page: Page
 }
 const PageCard: React.SFC<PageCardProps> = (props) => {
-  return( 
-    <div className="bg-slate-400"> 
-      Page id: {props.page.id}, index: {props.page.index}
+  return(
+    <div className="flex flex-col bg-slate-400 h-32 w-20">
+      <div>Page id: {props.page.id}</div>
+      <div>index: {props.page.index}</div>
     </div>
-        )
+  )
 }
 
 type PageListingProps = {
-  zine: Zine | null
-  children: ReactElement
+  zine: Zine
+  children: ReactElement | undefined
 }
 
-const PageListing: React.SFC<PageListingProps> = (props) => {
-  const [data, loading] = useFetch(
-    `http://localhost:8000/uploader/pages?zine=${props.zine.id}`
-  );
- 
+const PageListing: React.FC<PageListingProps> = (props) => {
+  const [pages, setPages] = useState<Page[]>([])
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPages(props.zine, setLoading).then((json)=>setPages(json))
+  }, [props.zine.id])
+
   return (
-    <>
-      { 
+    <div className="flex grow overflow-y-auto justify-start flex-col items-center gap-6 w-screen">
+      <div className="bg-yellow-200">
+        {props.zine.name}
+      </div>
+      {
         loading ? <p>Loading</p>:
-           <div className="flex gap-4">
-           {
-              data.map((page) => {
-                return(<PageCard key={"zine_"+ props.zine.id +"_page_" + page.id} page={page}></PageCard>)
-              })
-           }
-           </div>
-
-        
-
+          <div className="flex flex-start flex-wrap justify-center gap-4 overflow-y-auto max-h-fit w-9/12">
+        {
+          pages.map((page) => {
+            return(<div className="shrink-0" key={"zine_"+ props.zine.id +"_page_" + page.id}><PageCard page={page}></PageCard></div>)
+          })
+        }
+        </div>
       }
-    </>
+    </div>
   )
 }
 

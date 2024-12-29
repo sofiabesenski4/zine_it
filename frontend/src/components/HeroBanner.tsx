@@ -5,7 +5,7 @@ type HeroBannerProps = {
   children: ReactElement
 }
 
-const HeroBanner: React.SFC<ContainerProps> = (props) => {
+const HeroBanner: React.SFC<HeroBannerProps> = (props) => {
   return (
     <div className="ripped-border w-screen bg-[#f4f2e7]">
       <h1 className="text-3xl text m-auto w-36 font-bold underline">

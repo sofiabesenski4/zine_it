@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'OldNewspaperTypes';
-  src: local('OldNewspaperTypes'), url(./static/OldNewspaperTypes.woff) format('woff');
-  /* other formats include: 'woff2', 'truetype, 'opentype',
-                            'embedded-opentype', and 'svg' */
+@layer base {
+  @font-face {
+    font-family: 'OldNewspaperTypes';
+    src: local('OldNewspaperTypes'), url(./static/OldNewspaperTypes.woff) format('woff');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+  }
 }
 body {
   margin: 0;

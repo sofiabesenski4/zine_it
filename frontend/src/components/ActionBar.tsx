@@ -6,11 +6,10 @@ type ActionBarProps = {
 
 const ActionBar: React.SFC<ActionBarProps> = (props) => {
   return (
-    <div className="mb-8">
+    <div className="mb-8 flex gap-2">
         {props.children}
     </div>    
-)
+  )
 }
-
 
 export default ActionBar

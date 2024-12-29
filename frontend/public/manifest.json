@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Zine It",
+  "name": "Transform any printed content to a 'zine' format. Print, staple, pass!",
   "icons": [
     {
       "src": "favicon.ico",
