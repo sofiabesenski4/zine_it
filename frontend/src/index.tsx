@@ -3,21 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Eventually used for the Library feature.
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-const client = new ApolloClient({
-  uri: 'http://localhost:8000/graphql',
-  cache: new InMemoryCache(),
-});
+// import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+// const client = new ApolloClient({
+//  uri: 'http://localhost:8000/graphql',
+//  cache: new InMemoryCache(),
+//});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-    </Routes>
-  </BrowserRouter>
+  <React>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<App />} />
+      </Routes>
+    </BrowserRouter>
+  </React>
 );
 
 // If you want to start measuring performance in your app, pass a function
