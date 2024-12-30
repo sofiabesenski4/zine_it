@@ -25,7 +25,7 @@ export async function deleteZine(zine: Zine) {
   });
 }
 
-export async function fetchZines(setLoading: (boolean) => { void }) {
+export async function fetchZines(setLoading: (loading: boolean) => { null }) {
   setLoading(true);
   const response = await fetch('http://localhost:8000/uploader/zines.json');
   const json = await response.json();
@@ -33,7 +33,7 @@ export async function fetchZines(setLoading: (boolean) => { void }) {
   return json;
 }
 
-export async function fetchPages(zine: Zine, setLoading: (boolean) => { void }) {
+export async function fetchPages(zine: Zine, setLoading: (loading: boolean) => { void }) {
   setLoading(true);
   const response = await fetch(`http://localhost:8000/uploader/pages?zine=${zine.id}`);
   const json = await response.json();
