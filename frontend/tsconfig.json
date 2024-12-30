@@ -3,17 +3,11 @@
   "display": "Create React App",
   "_version": "2.0.0",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "target": "es2015",
-    "include": [
-      "src/*"
-    ],
+    "include": ["src/*"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -21,6 +15,7 @@
     "jsx": "react-jsx",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
+    "outDir": "builds",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true
