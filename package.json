@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "e2e:chrome": "cypress run --browser chrome"
+  },
   "devDependencies": {
     "@testing-library/react": "^16.1.0",
     "cypress": "^13.17.0",
