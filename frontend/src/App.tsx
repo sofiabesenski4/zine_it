@@ -5,22 +5,11 @@ import ActionBar from './components/ActionBar'
 import PageListing from './components/PageListing'
 import ZineListing from './components/ZineListing'
 import NavigationBar from './components/NavigationBar'
+import Button from './components/Button'
 import { ReactElement, useState, useEffect } from 'react'
 import { Zine } from "./types"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { fetchZines, createZine, deleteZine } from "./api"
-
-type ButtonProps = {
-  text: string
-  onClick: (event: React.MouseEvent<HTMLElement> | React.FormEvent) => void
-  children: ReactElement
-}
-
-const Button: React.FC<ButtonProps> = (props) => {
-  return (
-    <button onClick={props.onClick} className="bg-stone-300 p-2 hover:bg-sky-700" type="submit">{props.text}</button>
-  )
-}
 
 const App = () => {
   const [zines, setZines] = useState<Zine[]>([])
