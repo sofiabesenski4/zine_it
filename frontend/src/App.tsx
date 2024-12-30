@@ -68,14 +68,12 @@ const App = () => {
               </div>
             </form>
             ) : (null)
-          }
-
-          <ActionBar>
-            {!showZineForm && !currentZine && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
-            {!!currentZine && <Button onClick={() => onDeleteZineSubmit(currentZine)} text="Delete Zine" />}
-            {(showZineForm || currentZine || showZineForm) && <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Back" />}
-          </ActionBar>
-
+        }
+        <ActionBar>
+          {!showZineForm && !currentZine && <Button onClick={() => { setCurrentZine(null); setShowZineForm(true) }} text="New Zine" />}
+          {!!currentZine && <Button onClick={() => onDeleteZineSubmit(currentZine)} text="Delete Zine" />}
+          {(showZineForm || currentZine || showZineForm) && <Button onClick={() => { setCurrentZine(null); setShowZineForm(false) }} text="Back" />}
+        </ActionBar>
       </div>
     </div>
   );

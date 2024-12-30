@@ -6,7 +6,9 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = (props) => {
   return (
-    <button onClick={props.onClick} className="bg-stone-300 p-2 hover:bg-sky-700" type="submit">{props.text}</button>
+    <button onClick={props.onClick} className="bg-stone-300 p-2 hover:bg-sky-700" type="submit">
+      {props.text}
+    </button>
   )
 }
 
