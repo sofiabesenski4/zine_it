@@ -9,11 +9,11 @@ type ZineListingProps = {
 
 const ZineListing: React.SFC<ZineListingProps> = (props) => {
   return (
-    <div className="zine__listing flex gap-4 h-full justify-center flex-wrap overflow-y-auto">
+    <div data-test-id="zine__listing" className="flex gap-4 h-full justify-center flex-wrap overflow-y-auto">
       {
         props.zines.map((zine) =>
           <Container key={"zine_container__" + zine.id} onClick={() => props.setCurrentZine(zine)}>
-            <div className="mb-2 max-w-9/12">{zine.name}</div>
+            <div data-test="zine" className="mb-2 max-w-9/12">{zine.name}</div>
           </Container>
         )
       }

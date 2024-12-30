@@ -14,7 +14,25 @@ For registered users, you are allowed to upload your Zines to the library, and t
 We will use GraphQL in the "Library" feature of the project.
 For simplicity, we will use the DRF Serializers on the Uploader app, since we aren't going to benefit much from switching from REST.
 
-## Export from Python
+## Running tests
+To run tests as we develop for regression testing and TDD in general:
+
+### Server-side unit/API tests
+```
+source env/bin/activate
+pytest
+```
+### E2E tests
+Make sure the local front-end webpack server is running at localhost:3000, and  then run:
+```
+npx cypress run --browser chrome
+
+```
+
+Currently, for our E2E suite, we do not use any fixtures or test databases. Changes made during the E2E tests will change the development database, so be try to clean up as you go.
+
+
+## Generating Graphql Types dynamically: Export from Python
 
 https://docs.graphene-python.org/projects/django/en/latest/introspection/#graphql-sdl-representation
 
@@ -30,3 +48,4 @@ python manage.py graphql_schema
 cd frontend
 npm run gql
 ```
+
