@@ -4,10 +4,9 @@ import { Zine, Page } from '../types';
 import { fetchPages } from '../api';
 
 type PageCardProps = {
-  zine: Zine;
   page: Page;
 };
-const PageCard: React.SFC<PageCardProps> = (props) => {
+const PageCard: React.FC<PageCardProps> = (props) => {
   return (
     <div className='flex flex-col bg-slate-400 h-32 w-20'>
       <div>Page id: {props.page.id}</div>

@@ -14,7 +14,7 @@ const createZine = async (zineFields: ZineInputs) => {
   });
 };
 
-const deleteZine = async (zine: Zine): Promise<boolean> => {
+const deleteZine = async (zine: Zine): Promise<Response> => {
   const url = `http://localhost:8000/uploader/zines/${zine.id}/`;
 
   return await fetch(url, {

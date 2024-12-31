@@ -5,11 +5,11 @@ type NavigationBarProps = {
   showHeroBanner: boolean;
 };
 
-const NavigationBar: React.SFC<NavigationBarProps> = (props) => {
+const NavigationBar: React.FC<NavigationBarProps> = (props) => {
   return (
     <div className='flex flex-col items-center justify-start gap-8 w-full'>
-      <div className='App-logo self-start h-10 w-10' alt='logo'>
-        <svg src='../squatter-z.svg' />
+      <div className='App-logo self-start h-10 w-10'>
+        <img src='../squatter-z.svg' />
       </div>
       {props.showHeroBanner ? (
         <HeroBanner>
