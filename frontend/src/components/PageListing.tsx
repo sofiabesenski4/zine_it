@@ -18,7 +18,7 @@ const PageCard: React.SFC<PageCardProps> = (props) => {
 
 type PageListingProps = {
   zine: Zine;
-  children: ReactElement | null;
+  children?: ReactElement;
 };
 
 const PageListing: React.FC<PageListingProps> = (props) => {

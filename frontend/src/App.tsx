@@ -59,14 +59,12 @@ const App = () => {
                 <label className='text-slate-100'>Name</label>
                 <input {...register('name', { required: true })} />
                 {errors.name && <span>This field is required</span>}
-                <Button text='Save'>
-                  <input type='submit' />
-                </Button>
+                <Button text='Save' />
               </div>
             </form>
           ) : null}
           <ActionBar>
-            {!showZineForm && !currentZine && (
+            {!showZineForm && !currentZine ? (
               <Button
                 onClick={() => {
                   setCurrentZine(null);
@@ -74,11 +72,15 @@ const App = () => {
                 }}
                 text='New Zine'
               />
+            ) : (
+              <></>
             )}
-            {!!currentZine && (
+            {currentZine ? (
               <Button onClick={() => onDeleteZineSubmit(currentZine)} text='Delete Zine' />
+            ) : (
+              <></>
             )}
-            {(showZineForm || currentZine || showZineForm) && (
+            {showZineForm || currentZine || showZineForm ? (
               <Button
                 onClick={() => {
                   setCurrentZine(null);
@@ -86,6 +88,8 @@ const App = () => {
                 }}
                 text='Back'
               />
+            ) : (
+              <></>
             )}
           </ActionBar>
         </div>
