@@ -18,3 +18,4 @@ class UploaderRequestTest(TestCase):
 
         self.assertContains(response, "My First Zine")
         
+

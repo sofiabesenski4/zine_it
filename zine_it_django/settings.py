@@ -44,7 +44,6 @@ DEFAULT_APPS = [
 ]
 
 LOCAL_APPS = [
-    'integration_tests',
     'uploader'
 ]
 
