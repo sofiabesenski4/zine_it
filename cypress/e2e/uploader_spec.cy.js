@@ -13,5 +13,6 @@ describe('template spec', () => {
 
     cy.contains('Anarchy 300').click()
     cy.contains('Delete Zine').click()
+    cy.contains('Anarchy 300').should('not.exist')
   })
 })
