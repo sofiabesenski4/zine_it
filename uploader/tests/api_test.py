@@ -11,7 +11,8 @@ class UploaderRequestTest(APITestCase):
 
         response = self.client.get("/uploader/zines.json")
 
-        self.assertEqual(response.data, [{'id': 1, 'name': "My First Zine"}])
+        self.assertEqual(
+                response.data, [{'id': 1, 'name': "My First Zine", 'pages': []}])
     
     def test_create_zine(self):
         data = {'name': 'Test Zine'}

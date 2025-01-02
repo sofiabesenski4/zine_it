@@ -10,9 +10,10 @@ class PageSerializer(serializers.ModelSerializer):
         fields = ['id', 'zine', 'index', 'image']
 
 class ZineSerializer(serializers.ModelSerializer):
-    pages = PageSerializer(many=True)
+    pages = PageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Zine 
         fields = ['id', 'name', 'pages']
+        read_only_fields=['pages']
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactElement, useEffect, useState } from 'react';
 import { Zine, Page } from '../types';
-import { fetchPages } from '../api';
+import { fetchZineDetails } from '../api';
 
 type PageCardProps = {
   page: Page;
@@ -15,17 +15,19 @@ const PageCard: React.FC<PageCardProps> = (props) => {
   );
 };
 
-type PageListingProps = {
+type ZineDetailsProps = {
   zine: Zine;
   children?: ReactElement;
 };
 
-const PageListing: React.FC<PageListingProps> = (props) => {
+const ZineDetails: React.FC<ZineDetailsProps> = (props) => {
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchPages(props.zine, setLoading).then((json) => setPages(json));
+    fetchZineDetails(Number(props.zine.id), setLoading).then((zine_details) =>
+      setPages(zine_details.pages)
+    );
   }, [props.zine.id]);
 
   return (
@@ -48,4 +50,4 @@ const PageListing: React.FC<PageListingProps> = (props) => {
   );
 };
 
-export default PageListing;
+export default ZineDetails;

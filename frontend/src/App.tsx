@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import ActionBar from './components/ActionBar';
-import PageListing from './components/PageListing';
+import ZineDetails from './components/ZineDetails';
 import ZineListing from './components/ZineListing';
 import NavigationBar from './components/NavigationBar';
 import Button from './components/Button';
@@ -49,7 +49,7 @@ const App = () => {
         <div className='m-auto flex flex-col items-center justify-between gap-8 h-full w-11/12'>
           <NavigationBar showHeroBanner={!currentZine} />
           {currentZine ? (
-            <PageListing zine={currentZine} />
+            <ZineDetails zine={currentZine} />
           ) : (
             <ZineListing zines={zines} setCurrentZine={setCurrentZine} />
           )}

@@ -1,4 +1,4 @@
-import { Zine, ZineInputs, Page } from './types';
+import { Zine, ZineInputs } from './types';
 import { Dispatch, SetStateAction } from 'react';
 
 const createZine = async (zineFields: ZineInputs) => {
@@ -34,15 +34,15 @@ const fetchZines = async (setLoading: Dispatch<SetStateAction<boolean>>): Promis
   return json;
 };
 
-const fetchPages = async (
-  zine: Zine,
+const fetchZineDetails = async (
+  zine_id: number,
   setLoading: Dispatch<SetStateAction<boolean>>
-): Promise<Page[]> => {
+): Promise<Zine> => {
   setLoading(true);
-  const response = await fetch(`http://localhost:8000/uploader/pages?zine=${zine.id}`);
+  const response = await fetch(`http://localhost:8000/uploader/zines/${zine_id}`);
   const json = await response.json();
   await setLoading(false);
   return json;
 };
 
-export { deleteZine, fetchZines, fetchPages, createZine };
+export { deleteZine, fetchZines, fetchZineDetails, createZine };
