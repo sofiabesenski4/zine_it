@@ -1,7 +1,7 @@
 describe('template spec', () => {
   it('passes', () => {
     // TODO: Get SSL set up.
-    cy.visit('http://localhost:3000/')
+    cy.visit('http://localhost:3001/')
     cy.contains('Anarchy 300').should('not.exist')
 
     cy.contains('New Zine').click()

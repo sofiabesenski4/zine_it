@@ -3,12 +3,13 @@ import React from 'react';
 import ActionBar from './components/ActionBar';
 import ZineDetails from './components/ZineDetails';
 import ZineListing from './components/ZineListing';
+import ZineNew from './pages/ZineNew';
 import NavigationBar from './components/NavigationBar';
 import Button from './components/Button';
 import { useState, useEffect } from 'react';
 import { Zine, ZineInputs } from './types';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { fetchZines, createZine, deleteZine } from './api';
+import { useForm } from 'react-hook-form';
+import { loadZines } from './api';
 
 const App = () => {
   const [zines, setZines] = useState<Zine[]>([]);
@@ -16,7 +17,7 @@ const App = () => {
 
   // Always start by showing all zines in the database.
   useEffect(() => {
-    fetchZines(setLoading).then((json) => setZines(json));
+      loadZines(setZines, setLoading);
   }, []);
 
   const [showZineForm, setShowZineForm] = useState<boolean>(false);
@@ -27,17 +28,10 @@ const App = () => {
     formState: { errors }
   } = useForm<ZineInputs>();
 
-  const onCreateZineSubmit: SubmitHandler<ZineInputs> = (data) => {
-    createZine(data)
-      .then(() => fetchZines(setLoading))
-      .then((json) => setZines(json))
-      .then(() => setShowZineForm(false));
-  };
   const onDeleteZineSubmit = (zine: Zine) => {
     deleteZine(zine)
-      .then(() => fetchZines(setLoading))
-      .then((json) => setZines(json))
-      .then(() => setCurrentZine(null));
+    .then(() => loadZines(setZines, setLoading))
+    .then(() => setCurrentZine(null));
   };
 
   // TODO: Use React Router to pull this into a different route.
@@ -54,14 +48,7 @@ const App = () => {
             <ZineListing zines={zines} setCurrentZine={setCurrentZine} />
           )}
           {showZineForm ? (
-            <form onSubmit={handleSubmit(onCreateZineSubmit)}>
-              <div className='flex flex-col items-center gap-6'>
-                <label className='text-slate-100'>Name</label>
-                <input {...register('name', { required: true })} />
-                {errors.name && <span>This field is required</span>}
-                <Button text='Save' />
-              </div>
-            </form>
+            <ZineNew setZines={setZines} setShowZineForm={setShowZineForm} />
           ) : null}
           <ActionBar>
             {!showZineForm && !currentZine ? (

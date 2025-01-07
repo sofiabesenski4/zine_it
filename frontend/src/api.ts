@@ -26,13 +26,15 @@ const deleteZine = async (zine: Zine): Promise<Response> => {
   });
 };
 
-const fetchZines = async (setLoading: Dispatch<SetStateAction<boolean>>): Promise<Zine[]> => {
+const loadZines = async (setZines: Dispatch<SetStateAction<Zine[]>>, setLoading: Dispatch<SetStateAction<boolean>>): Promise<Zine[]> => {
   setLoading(true);
   const response = await fetch('http://localhost:8000/uploader/zines.json');
   const json = await response.json();
+  await setZines(json)
   await setLoading(false);
   return json;
 };
+
 
 const fetchZineDetails = async (
   zine_id: number,
@@ -45,4 +47,4 @@ const fetchZineDetails = async (
   return json;
 };
 
-export { deleteZine, fetchZines, fetchZineDetails, createZine };
+export { deleteZine, loadZines, fetchZineDetails, createZine };
