@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroBanner from './HeroBanner';
+import SquatterZ from '../squatter-z.svg';
 
 type NavigationBarProps = {
   showHeroBanner: boolean;
@@ -9,7 +10,7 @@ const NavigationBar: React.FC<NavigationBarProps> = (props) => {
   return (
     <div className='flex flex-col items-center justify-start gap-8 w-full'>
       <div className='App-logo self-start h-10 w-10'>
-        <img src='../squatter-z.svg' />
+        <img src={SquatterZ} />
       </div>
       {props.showHeroBanner ? (
         <HeroBanner>
