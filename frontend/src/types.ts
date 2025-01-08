@@ -1,3 +1,5 @@
+// Manually provided types, for now, for the ReST API
+
 interface Zine {
   id: string
   name: string
@@ -10,4 +12,4 @@ interface Page {
   image_src: string
 }
 
-export { Zine, Page }
+export type { Zine, Page }

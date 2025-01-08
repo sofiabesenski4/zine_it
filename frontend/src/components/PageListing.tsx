@@ -6,8 +6,8 @@ type PageCardProps = {
   zine: Zine
   page: Page
 }
-const PageCard: React.SFC<PageCardProps> = (props) => {
-  return(
+const PageCard: React.FC<PageCardProps> = (props) => {
+  return (
     <div className="flex flex-col bg-slate-400 h-32 w-20">
       <div>Page id: {props.page.id}</div>
       <div>index: {props.page.index}</div>
@@ -17,7 +17,7 @@ const PageCard: React.SFC<PageCardProps> = (props) => {
 
 type PageListingProps = {
   zine: Zine
-  children: ReactElement | undefined
+  children?: ReactElement
 }
 
 const PageListing: React.FC<PageListingProps> = (props) => {
@@ -25,7 +25,7 @@ const PageListing: React.FC<PageListingProps> = (props) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchPages(props.zine, setLoading).then((json)=>setPages(json))
+    fetchPages(props.zine, setLoading).then((json) => setPages(json))
   }, [props.zine.id])
 
   return (
@@ -34,15 +34,16 @@ const PageListing: React.FC<PageListingProps> = (props) => {
         {props.zine.name}
       </div>
       {
-        loading ? <p>Loading</p>:
+        loading ? <p>Loading</p> :
           <div className="flex flex-start flex-wrap justify-center gap-4 overflow-y-auto max-h-fit w-9/12">
-        {
-          pages.map((page) => {
-            return(<div className="shrink-0" key={"zine_"+ props.zine.id +"_page_" + page.id}><PageCard page={page}></PageCard></div>)
-          })
-        }
-        </div>
+            {
+              pages.map((page) => {
+                return (<div className="shrink-0" key={"zine_" + props.zine.id + "_page_" + page.index}><PageCard page={page} zine={props.zine}></PageCard></div>)
+              })
+            }
+          </div>
       }
+      <>{props.children}</>
     </div>
   )
 }

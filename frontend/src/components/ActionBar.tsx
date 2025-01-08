@@ -1,14 +1,13 @@
-//import './ActionBar.css';  
 import { ReactElement } from 'react'
 type ActionBarProps = {
-  children: ReactElement
+  children: ReactElement[]
 }
 
-const ActionBar: React.SFC<ActionBarProps> = (props) => {
+const ActionBar: React.FC<ActionBarProps> = (props) => {
   return (
     <div className="mb-8 flex gap-2">
-        {props.children}
-    </div>    
+      {props.children}
+    </div>
   )
 }
 

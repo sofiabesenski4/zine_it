@@ -5,7 +5,7 @@ type ContainerProps = {
   children: ReactElement
 }
 
-const Container: React.SFC<ContainerProps> = (props) => {
+const Container: React.FC<ContainerProps> = (props) => {
   return (
     <div className="
     rounded-md bg-stone-400 w-20 h-32

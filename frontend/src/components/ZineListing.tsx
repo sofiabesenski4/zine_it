@@ -3,11 +3,10 @@ import Container from './Container'
 
 type ZineListingProps = {
   zines: Zine[]
-  setCurrentZine: () => {}
-  children: ReactElement | undefined
+  setCurrentZine: (zine: Zine | null) => void
 }
 
-const ZineListing: React.SFC<ZineListingProps> = (props) => {
+const ZineListing: React.FC<ZineListingProps> = (props) => {
   return (
     <div data-test-id="zine__listing" className="flex gap-4 h-full justify-center flex-wrap overflow-y-auto">
       {

@@ -2,6 +2,10 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Create React App",
   "_version": "2.0.0",
+  "include": [
+    "src",
+    "src/custom.d.ts"
+  ],
   "compilerOptions": {
     "lib": [
       "dom",
@@ -11,9 +15,6 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "target": "es2015",
-    "include": [
-      "src/*"
-    ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

@@ -1,6 +1,6 @@
-import { Zine } from "./types"
+import { Zine } from './types'
 
-type ZineInputs = {
+export type ZineInputs = {
   name: string
 }
 
