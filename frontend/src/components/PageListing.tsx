@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react'
+import { useEffect, useState, PropsWithChildren } from 'react'
 import { Zine, Page } from '../types'
 import { fetchPages } from '../api'
 
@@ -17,10 +17,9 @@ const PageCard: React.FC<PageCardProps> = props => {
 
 type PageListingProps = {
   zine: Zine
-  children?: ReactElement
 }
 
-const PageListing: React.FC<PageListingProps> = props => {
+const PageListing: React.FC<PropsWithChildren<PageListingProps>> = props => {
   const [pages, setPages] = useState<Page[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -44,7 +43,7 @@ const PageListing: React.FC<PageListingProps> = props => {
           })}
         </div>
       )}
-      <>{props.children}</>
+      {props.children}
     </div>
   )
 }

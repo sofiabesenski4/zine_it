@@ -3,17 +3,16 @@ import ActionBar from './components/ActionBar'
 import PageListing from './components/PageListing'
 import ZineListing from './components/ZineListing'
 import NavigationBar from './components/NavigationBar'
-import { ReactElement, useState, useEffect } from 'react'
+import { useState, useEffect, PropsWithChildren } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { fetchZines, createZine, deleteZine, ZineInputs } from './api'
 import { Zine } from './types'
 
 type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLElement> | React.FormEvent) => void
-  children: ReactElement | string
 }
 
-const Button: React.FC<ButtonProps> = props => {
+const Button: React.FC<PropsWithChildren<ButtonProps>> = props => {
   return (
     <button onClick={props.onClick} className='bg-stone-300 p-2 hover:bg-sky-700' type='submit'>
       {props.children}
@@ -75,7 +74,7 @@ const App = () => {
         )}
 
         <ActionBar>
-          {!showZineForm && !currentZine ? (
+          {!showZineForm && !currentZine && (
             <Button
               onClick={() => {
                 setCurrentZine(null)
@@ -84,11 +83,9 @@ const App = () => {
             >
               New Zine
             </Button>
-          ) : (
-            <></>
           )}
-          {!!currentZine ? <Button onClick={() => onDeleteZineSubmit(currentZine)}>Delete Zine</Button> : <></>}
-          {showZineForm || currentZine || showZineForm ? (
+          {!!currentZine && <Button onClick={() => onDeleteZineSubmit(currentZine)}>Delete Zine</Button>}
+          {(showZineForm || currentZine || showZineForm) && (
             <Button
               onClick={() => {
                 setCurrentZine(null)
@@ -97,8 +94,6 @@ const App = () => {
             >
               Back
             </Button>
-          ) : (
-            <></>
           )}
         </ActionBar>
       </div>

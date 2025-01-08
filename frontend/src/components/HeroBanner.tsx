@@ -1,11 +1,7 @@
 import './HeroBanner.css'
-import { ReactElement } from 'react'
+import { PropsWithChildren } from 'react'
 
-type HeroBannerProps = {
-  children: ReactElement
-}
-
-const HeroBanner: React.FC<HeroBannerProps> = props => {
+const HeroBanner: React.FC<PropsWithChildren<{}>> = props => {
   return (
     <div className='ripped-border w-screen bg-[#f4f2e7]'>
       <h1 className='text-3xl text m-auto w-36 font-bold underline'>Zine it!</h1>

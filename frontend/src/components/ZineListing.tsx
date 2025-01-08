@@ -1,9 +1,10 @@
 import { Zine } from '../types'
 import Container from './Container'
+import { Dispatch, SetStateAction } from 'react'
 
 type ZineListingProps = {
   zines: Zine[]
-  setCurrentZine: (zine: Zine | null) => void
+  setCurrentZine: Dispatch<SetStateAction<Zine | null>>
 }
 
 const ZineListing: React.FC<ZineListingProps> = props => {
