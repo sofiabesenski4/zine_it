@@ -1,5 +1,5 @@
 import HeroBanner from './HeroBanner'
-import squatterZ from '../squatter-z.svg';
+import squatterZ from '../squatter-z.svg'
 
 
 type NavigationBarProps = {
@@ -19,6 +19,4 @@ const NavigationBar: React.FC<NavigationBarProps> = (props) => {
   )
 }
 
-
 export default NavigationBar
-

@@ -20,6 +20,4 @@ const ZineListing: React.FC<ZineListingProps> = (props) => {
   )
 }
 
-
 export default ZineListing
-

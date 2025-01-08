@@ -22,7 +22,7 @@ type PageListingProps = {
 
 const PageListing: React.FC<PageListingProps> = (props) => {
   const [pages, setPages] = useState<Page[]>([])
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetchPages(props.zine, setLoading).then((json) => setPages(json))
@@ -47,6 +47,5 @@ const PageListing: React.FC<PageListingProps> = (props) => {
     </div>
   )
 }
-
 
 export default PageListing

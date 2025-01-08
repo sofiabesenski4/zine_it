@@ -34,7 +34,7 @@ export async function fetchZines(setLoading: Function) {
     const response = await fetch("http://localhost:8000/uploader/zines.json")
     const json = await response.json()
     await setLoading(false)
-    return json;
+    return json
   }
 
  export async function fetchPages(zine: Zine, setLoading: Function) {

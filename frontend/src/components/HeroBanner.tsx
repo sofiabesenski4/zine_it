@@ -1,4 +1,4 @@
-import './HeroBanner.css';
+import './HeroBanner.css'
 import { ReactElement } from 'react'
 
 type HeroBannerProps = {
@@ -15,6 +15,5 @@ const HeroBanner: React.FC<HeroBannerProps> = (props) => {
     </div>
   )
 }
-
 
 export default HeroBanner
