@@ -4,7 +4,7 @@ describe('template spec', () => {
     cy.visit('http://localhost:3000/')
     let title = `TestZine ${Date.now()}`
     const allZines = '[data-test="zine"]'
-    cy.get(allZines).should(($z) => {
+    cy.get(allZines).should($z => {
       expect($z).to.not.contain(title)
     })
 
@@ -12,14 +12,14 @@ describe('template spec', () => {
     cy.get('input').type(title)
     cy.contains('Save').click()
 
-    cy.get(allZines).should(($z) => {
+    cy.get(allZines).should($z => {
       expect($z).to.contain(title)
     })
 
     cy.contains(title).click()
     cy.contains('Delete Zine').click()
 
-    cy.get(allZines).should(($z) => {
+    cy.get(allZines).should($z => {
       expect($z).to.not.contain(title)
     })
   })

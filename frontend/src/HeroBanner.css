@@ -1,5 +1,5 @@
 .ripped-border:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 45px;
   background-image: url('./static/ripped-edge.png');
@@ -10,7 +10,7 @@
 }
 
 .ripped-border:before {
-  content: " ";
+  content: ' ';
   background-position: center;
   display: block;
   width: 100%;
