@@ -1,19 +1,19 @@
-import { Zine } from "./types"
+import { Zine } from './types'
 
-type ZineInputs = {
+export type ZineInputs = {
   name: string
 }
 
 export async function createZine(zineFields: ZineInputs) {
-  let url = "http://localhost:8000/uploader/zines/"
+  let url = 'http://localhost:8000/uploader/zines/'
 
   return await fetch(url, {
     body: JSON.stringify(zineFields),
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json"
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
-    method: "POST"
+    method: 'POST',
   })
 }
 
@@ -22,25 +22,25 @@ export async function deleteZine(zine: Zine) {
 
   return await fetch(url, {
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json"
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
-    method: "DELETE"
+    method: 'DELETE',
   })
 }
 
 export async function fetchZines(setLoading: Function) {
-    setLoading(true)
-    const response = await fetch("http://localhost:8000/uploader/zines.json")
-    const json = await response.json()
-    await setLoading(false)
-    return json;
-  }
+  setLoading(true)
+  const response = await fetch('http://localhost:8000/uploader/zines.json')
+  const json = await response.json()
+  await setLoading(false)
+  return json
+}
 
- export async function fetchPages(zine: Zine, setLoading: Function) {
-    setLoading(true)
-    const response = await fetch(`http://localhost:8000/uploader/pages?zine=${zine.id}`)
-    const json = await response.json()
-    await setLoading(false)
-    return json
-  }
+export async function fetchPages(zine: Zine, setLoading: Function) {
+  setLoading(true)
+  const response = await fetch(`http://localhost:8000/uploader/pages?zine=${zine.id}`)
+  const json = await response.json()
+  await setLoading(false)
+  return json
+}

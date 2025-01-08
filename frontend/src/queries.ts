@@ -1,6 +1,6 @@
-import { useQuery, gql } from "@apollo/client"
+import { useQuery, gql } from '@apollo/client'
 
-const GET_ZINES =   gql`
+const GET_ZINES = gql`
   query MyQuery {
     allZines {
       pages {

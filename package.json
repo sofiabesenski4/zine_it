@@ -4,6 +4,7 @@
   },
   "devDependencies": {
     "cypress": "^13.17.0",
+    "prettier": "3.4.2",
     "web-vitals": "^4.2.4"
   },
   "dependencies": {
