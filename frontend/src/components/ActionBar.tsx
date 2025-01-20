@@ -1,15 +1,12 @@
-//import './ActionBar.css';  
-import { ReactElement } from 'react'
+import { ReactElement } from 'react';
+import React from 'react';
+
 type ActionBarProps = {
-  children: ReactElement
-}
+  children: ReactElement[];
+};
 
-const ActionBar: React.SFC<ActionBarProps> = (props) => {
-  return (
-    <div className="mb-8 flex gap-2">
-        {props.children}
-    </div>    
-  )
-}
+const ActionBar: React.FC<ActionBarProps> = (props) => {
+  return <div className='mb-8 flex justify-center gap-2'>{props.children}</div>;
+};
 
-export default ActionBar
+export default ActionBar;

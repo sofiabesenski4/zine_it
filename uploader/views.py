@@ -16,5 +16,6 @@ class PageViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         if self.request.query_params.get('zine'):
             zine = self.request.query_params.get('zine')
+            return queryset.filter(zine=zine) 
+        return queryset
 
-        return queryset.filter(zine=zine) 

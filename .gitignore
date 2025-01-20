@@ -150,5 +150,6 @@ chromedriver
 
 frontend/node_modules/*
 node_modules/*
+builds/
 
 cypress/screenshots/

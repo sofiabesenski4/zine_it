@@ -44,7 +44,6 @@ DEFAULT_APPS = [
 ]
 
 LOCAL_APPS = [
-    'integration_tests',
     'uploader'
 ]
 
@@ -146,4 +145,5 @@ GRAPHENE = {
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'http://localhost:3001',
 ]
