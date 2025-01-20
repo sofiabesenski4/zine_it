@@ -13,8 +13,8 @@ type PageCardProps = {
 const PageCard: React.FC<PageCardProps> = (props) => {
   return (
     <div className='flex flex-col bg-slate-400 h-32 w-20'>
-      <div>Page id: {props.page.id}</div>
-      <div>index: {props.page.index}</div>
+      <div>id: {props.page.id}</div>
+      <div>idx: {props.page.index}</div>
     </div>
   );
 };
