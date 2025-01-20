@@ -6,7 +6,7 @@ type ActionBarProps = {
 };
 
 const ActionBar: React.FC<ActionBarProps> = (props) => {
-  return <div className='mb-8 flex gap-2'>{props.children}</div>;
+  return <div className='mb-8 flex justify-center gap-2'>{props.children}</div>;
 };
 
 export default ActionBar;
