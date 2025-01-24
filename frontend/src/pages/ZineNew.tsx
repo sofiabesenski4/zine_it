@@ -15,8 +15,7 @@ const ZineNew = () => {
   } = useForm<ZineInputs>();
 
   const onCreateZineSubmit: SubmitHandler<ZineInputs> = (data) => {
-    createZine(data);
-    navigate('/');
+    createZine(data).then(() => navigate('/'));
   };
 
   return (
