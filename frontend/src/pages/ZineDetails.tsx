@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import ActionBar from '../components/ActionBar';
 import ButtonLink from '../components/ButtonLink';
 import Button from '../components/Button';
+import NewPageModal from '../components/NewPageModal';
 import { Zine, Page } from '../types';
 import { fetchZineDetails, deleteZine } from '../api';
 import { useParams, useNavigate } from 'react-router';
@@ -23,6 +24,7 @@ const ZineDetails = () => {
   const navigate = useNavigate();
   const { zineId } = useParams();
   const [zine, setZine] = useState<Zine | null>(null);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,6 +48,14 @@ const ZineDetails = () => {
     });
   };
 
+  function openModal() {
+    setModalIsOpen(true);
+  }
+
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+
   return (
     <>
       {loading ? (
@@ -68,9 +78,12 @@ const ZineDetails = () => {
           )}
 
           <ActionBar>
+            <Button text='New Page' onClick={openModal} />
             <Button text='Delete Zine' onClick={onDeleteClick} />
             <ButtonLink text='Zine Listing' destination='/' />
           </ActionBar>
+
+          {modalIsOpen && <NewPageModal closeModal={closeModal}></NewPageModal>}
         </div>
       )}
     </>

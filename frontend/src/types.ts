@@ -14,4 +14,8 @@ type ZineInputs = {
   name: string;
 };
 
-export { Zine, ZineInputs, Page };
+type PageInputs = {
+  index: number;
+};
+
+export { Zine, ZineInputs, Page, PageInputs };
