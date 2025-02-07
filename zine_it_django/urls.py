@@ -26,7 +26,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('uploader/', include("uploader.urls")),
     path('graphql', csrf_exempt(GraphQLView.as_view(graphiql=True)))
-]
-
-if settings.DEBUG:  # new
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
