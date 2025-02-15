@@ -52,9 +52,16 @@ const ZineDetails = () => {
     setModalIsOpen(true);
   }
 
-  function closeModal() {
-    setModalIsOpen(false);
-  }
+  const closeModal = async () => {
+    fetchZineDetails(Number(zineId), setLoading)
+      .then((zineDetails) => {
+        setZine(zineDetails);
+        setPages(zineDetails.pages);
+      })
+      .then(() => {
+        setModalIsOpen(false);
+      });
+  };
 
   return (
     <>
