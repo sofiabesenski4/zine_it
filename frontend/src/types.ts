@@ -16,7 +16,7 @@ type ZineInputs = {
 
 type PageInputs = {
   index: number;
-  zine_id: number;
+  zine: number;
   image_url: string;
 };
 

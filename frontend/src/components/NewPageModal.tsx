@@ -32,7 +32,7 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
           <label className='text-slate-100'>Index</label>
           <input {...register('index', { required: true })} />
           {errors.index && <span>This field is required</span>}
-          <input {...register('zine_id', { value: props.zineId })} type='hidden' />
+          <input {...register('zine', { value: props.zineId })} type='hidden' />
           <Button text='Save' />
         </div>
       </form>
