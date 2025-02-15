@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from uploader.models import Page, Zine 
 from uploader.serializers import ZineSerializer, PageSerializer
+import pdb
 
 from rest_framework import viewsets
 
@@ -9,6 +10,7 @@ class ZineViewSet(viewsets.ModelViewSet):
     serializer_class = ZineSerializer
 
 class PageViewSet(viewsets.ModelViewSet):
+    model = Page
     queryset = Page.objects.all().order_by('id')
     serializer_class = PageSerializer
 
@@ -18,4 +20,4 @@ class PageViewSet(viewsets.ModelViewSet):
             zine = self.request.query_params.get('zine')
             return queryset.filter(zine=zine) 
         return queryset
-
+    

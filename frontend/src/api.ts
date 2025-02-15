@@ -1,4 +1,4 @@
-import { Zine, ZineInputs } from './types';
+import { Zine, ZineInputs, PageInputs } from './types';
 import { Dispatch, SetStateAction } from 'react';
 
 const createZine = async (zineFields: ZineInputs) => {
@@ -26,25 +26,40 @@ const deleteZine = async (zine: Zine): Promise<Response> => {
   });
 };
 
-const loadZines = async (setZines: Dispatch<SetStateAction<Zine[]>>, setLoading: Dispatch<SetStateAction<boolean>>): Promise<Zine[]> => {
+const loadZines = async (
+  setZines: Dispatch<SetStateAction<Zine[]>>,
+  setLoading: Dispatch<SetStateAction<boolean>>
+): Promise<Zine[]> => {
   setLoading(true);
   const response = await fetch('http://localhost:8000/uploader/zines.json');
   const json = await response.json();
-  await setZines(json)
+  await setZines(json);
   await setLoading(false);
   return json;
 };
 
-
 const fetchZineDetails = async (
-  zine_id: number,
+  zineId: number,
   setLoading: Dispatch<SetStateAction<boolean>>
 ): Promise<Zine> => {
   setLoading(true);
-  const response = await fetch(`http://localhost:8000/uploader/zines/${zine_id}`);
+  const response = await fetch(`http://localhost:8000/uploader/zines/${zineId}`);
   const json = await response.json();
   await setLoading(false);
   return json;
 };
 
-export { deleteZine, loadZines, fetchZineDetails, createZine };
+const createPage = async (pageFields: PageInputs) => {
+  const url = 'http://localhost:8000/uploader/pages/';
+
+  return await fetch(url, {
+    body: JSON.stringify(pageFields),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    method: 'POST'
+  });
+};
+
+export { deleteZine, loadZines, fetchZineDetails, createZine, createPage };

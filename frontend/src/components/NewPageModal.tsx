@@ -2,10 +2,12 @@ import React from 'react';
 import Modal from 'react-modal';
 import Button from './Button';
 import { PageInputs } from '../types';
+import { createPage } from '../api';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 interface NewPageModalProps {
   closeModal: () => void;
+  zineId: number;
 }
 
 const NewPageModal: React.FC<NewPageModalProps> = (props) => {
@@ -16,9 +18,8 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
   } = useForm<PageInputs>();
 
   const onCreatePageSubmit: SubmitHandler<PageInputs> = (data) => {
-    // createPage(data).then(() => navigate('/'));
+    createPage(data).then(props.closeModal());
     console.log(data);
-    props.closeModal();
   };
 
   return (
@@ -31,6 +32,7 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
           <label className='text-slate-100'>Index</label>
           <input {...register('index', { required: true })} />
           {errors.index && <span>This field is required</span>}
+          <input {...register('zine_id', { value: props.zineId })} type='hidden' />
           <Button text='Save' />
         </div>
       </form>

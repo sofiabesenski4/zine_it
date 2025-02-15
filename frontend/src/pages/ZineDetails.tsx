@@ -83,7 +83,7 @@ const ZineDetails = () => {
             <ButtonLink text='Zine Listing' destination='/' />
           </ActionBar>
 
-          {modalIsOpen && <NewPageModal closeModal={closeModal}></NewPageModal>}
+          {modalIsOpen && <NewPageModal closeModal={closeModal} zineId={zineId}></NewPageModal>}
         </div>
       )}
     </>

@@ -33,5 +33,5 @@ class Zine(models.Model):
 class Page(models.Model):
     index = models.IntegerField(default=0)
     zine = models.ForeignKey(Zine, related_name="pages", on_delete=models.CASCADE, default=None)
-    image = models.ImageField(upload_to="uploaded_images/", null=True, blank=True)
+    image_url = models.ImageField(upload_to="uploaded_images/", null=True, blank=True)
 

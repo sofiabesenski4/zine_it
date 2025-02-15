@@ -2,12 +2,10 @@ from .models import Zine, Page
 
 from rest_framework import serializers
 
-
-
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page 
-        fields = ['id', 'zine', 'index', 'image']
+        fields = "__all__"
 
 class ZineSerializer(serializers.ModelSerializer):
     pages = PageSerializer(many=True, read_only=True)
