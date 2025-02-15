@@ -51,13 +51,14 @@ const fetchZineDetails = async (
 
 const createPage = async (pageFields: PageInputs) => {
   const url = 'http://localhost:8000/uploader/pages/';
+  const formData = new FormData();
+  formData.append('index', pageFields.index);
+  formData.append('zine', pageFields.zine);
+  formData.append('image_url', pageFields.image_url[0]);
+  console.log(pageFields);
 
   return await fetch(url, {
-    body: JSON.stringify(pageFields),
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    },
+    body: formData,
     method: 'POST'
   });
 };

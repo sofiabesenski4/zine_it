@@ -19,7 +19,6 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
 
   const onCreatePageSubmit: SubmitHandler<PageInputs> = (data) => {
     createPage(data).then(props.closeModal());
-    console.log(data);
   };
 
   return (
@@ -40,9 +39,17 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
           </div>
           {errors.index && <span>This field is required</span>}
           <input {...register('zine', { value: props.zineId })} type='hidden' />
+          <input
+            type='file'
+            className='bg-yellow-200'
+            accept='image/*'
+            {...register('image_url', { required: false })}
+          />
           <Button text='Save' />
         </div>
       </form>
+
+      <img src={''} className='img' alt='Uploaded Image Preview' />
     </Modal>
   );
 };

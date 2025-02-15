@@ -3,6 +3,7 @@ from .models import Zine, Page
 from rest_framework import serializers
 
 class PageSerializer(serializers.ModelSerializer):
+    image_url = serializers.ImageField(required=False)
     class Meta:
         model = Page 
         fields = "__all__"
