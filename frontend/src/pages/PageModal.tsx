@@ -61,7 +61,6 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
           </div>
         </form>
 
-        <img src={''} className='img' alt='Uploaded Image Preview' />
         <Button className={'self-end'} onClick={props.closeModal} text='Close' />
       </div>
     </Modal>
