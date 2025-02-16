@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ActionBar from '../components/ActionBar';
 import ButtonLink from '../components/ButtonLink';
 import Button from '../components/Button';
-import NewPageModal from '../components/NewPageModal';
+import PageModal from '../pages/PageModal';
 import { Zine, Page } from '../types';
 import { fetchZineDetails, deleteZine } from '../api';
 import { useParams, useNavigate } from 'react-router';
@@ -91,7 +91,7 @@ const ZineDetails = () => {
             <ButtonLink text='Zine Listing' destination='/' />
           </ActionBar>
 
-          {modalIsOpen && <NewPageModal closeModal={closeModal} zineId={zineId}></NewPageModal>}
+          {modalIsOpen && <PageModal closeModal={closeModal} zineId={zineId}></PageModal>}
         </div>
       )}
     </>

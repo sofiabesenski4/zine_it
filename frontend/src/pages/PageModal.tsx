@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import Button from './Button';
+import Button from '../components/Button';
 import { PageInputs } from '../types';
 import { createPage } from '../api';
 import { useForm, SubmitHandler } from 'react-hook-form';
