@@ -26,30 +26,42 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
       isOpen={true}
       onRequestClose={props.closeModal}
       contentLabel='Example Modal'
-      className='bg-stone-800'
+      className='App bg-stone-800'
+      style={{
+        content: {
+          position: 'absolute',
+          top: '100px',
+          left: 0,
+          right: 0,
+          bottom: '200px'
+        }
+      }}
     >
-      <h2>New Page</h2>
-      <Button onClick={props.closeModal} text='close'></Button>
+      <div className='flex flex-col h-full justify-between p-2'>
+        <h2 className='mt-10'>
+          <span className='bg-yellow-200'>New Page</span>
+        </h2>
 
-      <form onSubmit={handleSubmit(onCreatePageSubmit)}>
-        <div className='flex flex-col items-center gap-6'>
-          <div className='flex gap-2'>
-            <label className='bg-yellow-200 p-2'>Index</label>
-            <input {...register('index', { required: true })} />
+        <form onSubmit={handleSubmit(onCreatePageSubmit)}>
+          <div className='flex flex-col justify-center items-center gap-6'>
+            <div className='flex gap-2'>
+              <input {...register('index', { required: true })} value={1} type='hidden' />
+            </div>
+            {errors.index && <span>This field is required</span>}
+            <input {...register('zine', { value: props.zineId })} type='hidden' />
+            <input
+              type='file'
+              className='bg-yellow-200'
+              accept='image/*'
+              {...register('image_url', { required: false })}
+            />
+            <Button text='Save' className='' />
           </div>
-          {errors.index && <span>This field is required</span>}
-          <input {...register('zine', { value: props.zineId })} type='hidden' />
-          <input
-            type='file'
-            className='bg-yellow-200'
-            accept='image/*'
-            {...register('image_url', { required: false })}
-          />
-          <Button text='Save' />
-        </div>
-      </form>
+        </form>
 
-      <img src={''} className='img' alt='Uploaded Image Preview' />
+        <img src={''} className='img' alt='Uploaded Image Preview' />
+        <Button className={'self-end'} onClick={props.closeModal} text='Close' />
+      </div>
     </Modal>
   );
 };
