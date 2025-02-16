@@ -5,18 +5,41 @@ import ButtonLink from '../components/ButtonLink';
 import Button from '../components/Button';
 import PageModal from '../pages/PageModal';
 import { Zine, Page } from '../types';
-import { fetchZineDetails, deleteZine } from '../api';
+import { fetchZineDetails, deleteZine, updatePage } from '../api';
 import { useParams, useNavigate } from 'react-router';
 
 type PageCardProps = {
   page: Page;
+  refreshData: () => void;
 };
+
 const PageCard: React.FC<PageCardProps> = (props) => {
+  const nextIndex = props.page.index + 1;
+  const prevIndex = props.page.index - 1;
+
   return (
-    <div className='flex flex-col bg-slate-400 h-64 w-40'>
-      <div>id: {props.page.id}</div>
+    <div className='flex flex-col justify-between bg-slate-400 h-64 w-40'>
       <div>idx: {props.page.index}</div>
       <img src={props.page.image_url} alt='page' />
+      <div className='flex justify-center items-center align-center'>
+        <Button
+          text='<-'
+          onClick={() => {
+            updatePage(props.page.id, prevIndex).then(() => {
+              props.refreshData();
+            });
+          }}
+        />
+        <span className='h-full bg-yellow-200'>Index</span>
+        <Button
+          text='->'
+          onClick={() => {
+            updatePage(props.page.id, nextIndex).then(() => {
+              props.refreshData();
+            });
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -29,11 +52,15 @@ const ZineDetails = () => {
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const refreshData = () => {
     fetchZineDetails(Number(zineId), setLoading).then((zineDetails) => {
       setZine(zineDetails);
       setPages(zineDetails.pages);
     });
+  };
+
+  useEffect(() => {
+    refreshData();
   }, [zineId]);
 
   const onDeleteClick = () => {
@@ -78,7 +105,7 @@ const ZineDetails = () => {
               {pages.map((page) => {
                 return (
                   <div className='shrink-0' key={'zine_' + zineId + '_page_' + page.id}>
-                    <PageCard page={page}></PageCard>
+                    <PageCard page={page} refreshData={refreshData}></PageCard>
                   </div>
                 );
               })}
