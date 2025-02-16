@@ -46,9 +46,6 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
 
         <form onSubmit={handleSubmit(onCreatePageSubmit)}>
           <div className='flex flex-col justify-center items-center gap-6'>
-            <div className='flex gap-2'>
-              <input {...register('index', { required: true })} value={1} type='hidden' />
-            </div>
             {errors.index && <span>This field is required</span>}
             <input {...register('zine', { value: props.zineId })} type='hidden' />
             <input
