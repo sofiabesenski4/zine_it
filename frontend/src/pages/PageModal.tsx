@@ -18,7 +18,9 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
   } = useForm<PageInputs>();
 
   const onCreatePageSubmit: SubmitHandler<PageInputs> = (data) => {
-    createPage(data).then(props.closeModal());
+    createPage(data).then(() => {
+      props.closeModal();
+    });
   };
 
   return (
