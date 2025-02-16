@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.db.models import Max
 from uploader.models import Page, Zine 
 from uploader.serializers import ZineSerializer, PageSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -39,3 +40,16 @@ class PageViewSet(viewsets.ModelViewSet):
 
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        # TODO: There is probably a better way to do this.
+        max_index = Page.objects.filter(zine=request.data['zine']).aggregate(Max('index'))['index__max']
+        next_index = max_index + 1 if max_index is not None else 0
+
+        request.data['index'] = next_index 
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
