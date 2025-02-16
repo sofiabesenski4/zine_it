@@ -52,10 +52,10 @@ const NewPageModal: React.FC<NewPageModalProps> = (props) => {
             {errors.index && <span>This field is required</span>}
             <input {...register('zine', { value: props.zineId })} type='hidden' />
             <input
+              {...register('image_url', { required: false })}
               type='file'
               className='bg-yellow-200'
               accept='image/*'
-              {...register('image_url', { required: false })}
             />
             <Button text='Save' className='' />
           </div>
