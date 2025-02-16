@@ -13,7 +13,7 @@ type PageCardProps = {
 };
 const PageCard: React.FC<PageCardProps> = (props) => {
   return (
-    <div className='flex flex-col bg-slate-400 h-32 w-20'>
+    <div className='flex flex-col bg-slate-400 h-64 w-40'>
       <div>id: {props.page.id}</div>
       <div>idx: {props.page.index}</div>
       <img src={props.page.image_url} alt='page' />
