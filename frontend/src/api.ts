@@ -62,15 +62,16 @@ const createPage = async (pageFields: PageInputs) => {
   });
 };
 
-const updatePage = async (id: number, index: number) => {
+const updatePage = async (id: number, currentIndex: number, index: number) => {
   const url = `http://localhost:8000/uploader/pages/${id}/`;
   const formData = new FormData();
 
   formData.append('index', index);
+  formData.append('current_index', currentIndex);
 
   return await fetch(url, {
     body: formData,
-    method: 'PUT'
+    method: 'PATCH'
   });
 };
 

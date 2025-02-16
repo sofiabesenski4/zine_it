@@ -25,7 +25,7 @@ const PageCard: React.FC<PageCardProps> = (props) => {
         <Button
           text='<-'
           onClick={() => {
-            updatePage(props.page.id, prevIndex).then(() => {
+            updatePage(props.page.id, props.page.index, prevIndex).then(() => {
               props.refreshData();
             });
           }}
@@ -34,7 +34,7 @@ const PageCard: React.FC<PageCardProps> = (props) => {
         <Button
           text='->'
           onClick={() => {
-            updatePage(props.page.id, nextIndex).then(() => {
+            updatePage(props.page.id, props.page.index, nextIndex).then(() => {
               props.refreshData();
             });
           }}

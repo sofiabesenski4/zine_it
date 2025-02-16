@@ -22,4 +22,20 @@ class PageViewSet(viewsets.ModelViewSet):
             zine = self.request.query_params.get('zine')
             return queryset.filter(zine=zine) 
         return queryset
-    
+
+    def partial_update(self, request, *args, **kwargs):
+        # TODO: This is probably not going to scale well. Replace this with a
+        # smarter way to represent and swap ordered pages.
+        index = int(request.data['index'])
+        current_pk = int(kwargs['pk'])
+        zine = Page.objects.get(pk=current_pk).zine
+
+        try:
+            page_at_index = Page.objects.get(index=index, zine=zine)
+            page_at_index.index = request.data['current_index']
+            page_at_index.save()
+        except Page.DoesNotExist:
+            pass
+
+        kwargs['partial'] = True
+        return self.update(request, *args, **kwargs)
