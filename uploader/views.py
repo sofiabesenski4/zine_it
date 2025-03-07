@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.db.models import Max
-from uploader.models import Page, Zine 
+from uploader.models import Page, Zine
 from uploader.serializers import ZineSerializer, PageSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework import status
 import pdb
 
 from rest_framework import viewsets
@@ -21,7 +23,7 @@ class PageViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         if self.request.query_params.get('zine'):
             zine = self.request.query_params.get('zine')
-            return queryset.filter(zine=zine) 
+            return queryset.filter(zine=zine)
         return queryset
 
     def partial_update(self, request, *args, **kwargs):
@@ -46,7 +48,7 @@ class PageViewSet(viewsets.ModelViewSet):
         max_index = Page.objects.filter(zine=request.data['zine']).aggregate(Max('index'))['index__max']
         next_index = max_index + 1 if max_index is not None else 0
 
-        request.data['index'] = next_index 
+        request.data['index'] = next_index
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
