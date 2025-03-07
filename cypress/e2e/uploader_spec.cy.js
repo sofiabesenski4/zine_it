@@ -12,7 +12,7 @@ describe('template spec', () => {
 
     cy.contains('Anarchy 300').click();
     cy.contains('New Page').click();
-    cy.get('input').type('1');
+    cy.get('input[type=file]').selectFile('cypress/fixtures/blackflag.jpg');
     cy.contains('Save').click();
 
     cy.contains('Delete Zine').click();
